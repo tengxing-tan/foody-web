@@ -93,7 +93,7 @@ $restaurant_ID = 1;
         <!-- remember to add inside form: enctype="multipart/form-data" -->
         <div>
           <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
-          <img id="preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_image']; ?>" alt="Preview">
+          <img id="preview" src="" alt="Preview">
         </div>
         <!-- Add button -->
         <button class="btn submit-button" type="submit" name="submit" value="add-menu">Add</button>
