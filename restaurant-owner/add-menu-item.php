@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Session
  */
@@ -7,7 +8,7 @@ session_start();
 /**
  * Establish database
  * db name: 'foody'
-*/
+ */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
 // $restaurant_ID = $_SESSION['restaurant_ID'];
 $restaurant_ID = 1;
@@ -31,31 +32,13 @@ $restaurant_ID = 1;
 </head>
 
 <body>
-  <!-- title bar -->
-  <div id="title-bar">
-    <!-- foody logo -->
-    <a id="foody-link" class="icon-link" href="#index.html">Foody</a>
-
-    <!-- user profile -->
-    <div>
-      <a class="icon-link" href="#">
-        Rider
-        <i class="fa-solid fa-user"></i>
-      </a>
-    </div>
-  </div>
+  <header>
+    <?php include 'assets/reusable/header.php'; ?>
+  </header>
 
   <!-- content -->
   <div id="content-wrapper">
-    <!-- navigation bar (left side) -->
-    <nav id="nav-bar">
-      <ul>
-        <li><a class="nav-link" href="index.html#">Summary</a></li>
-        <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
-        <li><a class="nav-link" href="order-list.html">Order List</a></li>
-        <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
-      </ul>
-    </nav>
+    <?php include 'assets/reusable/navbar.php'; ?>
 
     <!-- main content (right side) -->
     <div id="main-content">
@@ -69,14 +52,14 @@ $restaurant_ID = 1;
           <?php
           $sql = "SELECT * FROM `FoodCategory`";
           $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-          
+
           while ($row = mysqli_fetch_assoc($result)) {
             //print each row
-            ?>
+          ?>
             <option value="<?php echo $row['food_category_ID']; ?>">
               <?php echo $row['category_name']; ?>
             </option>
-            <?php
+          <?php
           } // close while mysqli fetch
           ?>
         </select>
@@ -85,8 +68,7 @@ $restaurant_ID = 1;
         <textarea class="text-input" name="foodDescription" rows="5" cols="80">None</textarea>
         <!-- Price -->
         <label class="bold-label required-input" for="foodPrice">Price (RM)</label>
-        <input class="text-input" type="number" name="foodPrice" value="0" step=0.01
- required>
+        <input class="text-input" type="number" name="foodPrice" value="0" step=0.01 required>
         <!-- Food picture -->
         <label class="bold-label required-input" for="foodImage">Food picture</label>
         <!-- upload food picture -->
@@ -113,4 +95,5 @@ $restaurant_ID = 1;
     }
   }
 </script>
+
 </html>

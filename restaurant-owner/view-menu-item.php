@@ -32,31 +32,13 @@ $food_ID = $_GET['id'];
 </head>
 
 <body>
-  <!-- title bar -->
-  <div id="title-bar">
-    <!-- foody logo -->
-    <a id="foody-link" class="icon-link" href="#index.html">Foody</a>
-
-    <!-- user profile -->
-    <div>
-      <a class="icon-link" href="#">
-        Rider
-        <i class="fa-solid fa-user"></i>
-      </a>
-    </div>
-  </div>
+  <header>
+    <?php include 'assets/reusable/header.php'; ?>
+  </header>
 
   <!-- content -->
   <div id="content-wrapper">
-    <!-- navigation bar (left side) -->
-    <nav id="nav-bar">
-      <ul>
-        <li><a class="nav-link" href="index.html#">Summary</a></li>
-        <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
-        <li><a class="nav-link" href="order-list.html">Order List</a></li>
-        <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
-      </ul>
-    </nav>
+    <?php include 'assets/reusable/navbar.php'; ?>
 
     <!-- main content (right side) -->
     <div id="main-content">
@@ -79,7 +61,10 @@ $food_ID = $_GET['id'];
             while ($row_fc = mysqli_fetch_assoc($result_fc)) {
               $foodCategoryID = $row_fc['food_category_ID'];
           ?>
-              <option value="<?php echo $foodCategoryID; ?>" <?php if ($foodCategoryID === $row['food_category_ID']) { echo "selected"; } // use attribute: selected ?>>
+              <option value="<?php echo $foodCategoryID; ?>" <?php if ($foodCategoryID === $row['food_category_ID']) {
+                                                                echo "selected";
+                                                              } // use attribute: selected 
+                                                              ?>>
                 <?php echo $row_fc['category_name']; ?>
               </option>
           <?php
@@ -92,8 +77,7 @@ $food_ID = $_GET['id'];
         <textarea class="text-input" name="foodDescription" rows="5" cols="80"><?php echo $row['food_description']; ?></textarea>
         <!-- Price -->
         <label class="bold-label required-input" for="foodPrice">Price (RM)</label>
-        <input class="text-input" type="number" name="foodPrice" value="<?php echo $row['food_price']; ?>" step=0.01
- required>
+        <input class="text-input" type="number" name="foodPrice" value="<?php echo $row['food_price']; ?>" step=0.01 required>
         <!-- Food picture -->
         <label class="bold-label" for="foodImage">Food picture</label>
         <!-- upload food picture -->

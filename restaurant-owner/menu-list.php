@@ -29,31 +29,13 @@ session_destroy();
 </head>
 
 <body>
-    <!-- title bar -->
-    <div id="title-bar">
-        <!-- foody logo -->
-        <a id="foody-link" class="icon-link" href="#index.html">Foody</a>
-
-        <!-- user profile -->
-        <div>
-            <a class="icon-link" href="#">
-                Rider
-                <i class="fa-solid fa-user"></i>
-            </a>
-        </div>
-    </div>
+    <header>
+        <?php include 'assets/reusable/header.php'; ?>
+    </header>
 
     <!-- content -->
     <div id="content-wrapper">
-        <!-- navigation bar (left side) -->
-        <nav id="nav-bar">
-            <ul>
-                <li><a class="nav-link" href="index.html#">Summary</a></li>
-                <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
-                <li><a class="nav-link" href="order-list.html">Order List</a></li>
-                <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
-            </ul>
-        </nav>
+        <?php include 'assets/reusable/navbar.php'; ?>
 
         <!-- main content (right side) -->
         <div id="main-content">
