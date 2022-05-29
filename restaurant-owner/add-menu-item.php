@@ -1,5 +1,9 @@
 <?php
+/**
+ * Session
+ */
 session_start();
+
 /**
  * Establish database
  * db name: 'foody'
@@ -47,7 +51,7 @@ $restaurant_ID = 1;
     <nav id="nav-bar">
       <ul>
         <li><a class="nav-link" href="index.html#">Summary</a></li>
-        <li><a class="nav-link" href="menu-list.html">Menu List</a></li>
+        <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
         <li><a class="nav-link" href="order-list.html">Order List</a></li>
         <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
       </ul>
@@ -55,13 +59,13 @@ $restaurant_ID = 1;
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <form class="user-input-form" action="actions/create_menu.php?id=<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
+      <form class="user-input-form" action="actions/create_menu_item.php?id=<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
         <!-- Food title -->
-        <label class="bold-label required-input" for="food-title">Food title</label>
-        <input class="text-input" type="text" name="food-title" placeholder="Enter food title" required>
+        <label class="bold-label required-input" for="foodTitle">Food title</label>
+        <input class="text-input" type="text" name="foodTitle" placeholder="Enter food title" required>
         <!-- Food category -->
-        <label class="bold-label required-input" for="food-category">Food category</label>
-        <select class="text-input" name="food-category" required>
+        <label class="bold-label required-input" for="foodCategory">Food category</label>
+        <select class="text-input" name="foodCategory" required>
           <?php
           $sql = "SELECT * FROM `FoodCategory`";
           $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -77,21 +81,36 @@ $restaurant_ID = 1;
           ?>
         </select>
         <!-- Food description -->
-        <label class="bold-label" for="food-description">Food description</label>
-        <textarea class="text-input" rows="5" cols="80">None</textarea>
+        <label class="bold-label" for="foodDescription">Food description</label>
+        <textarea class="text-input" name="foodDescription" rows="5" cols="80">None</textarea>
         <!-- Price -->
-        <label class="bold-label required-input" for="food-price">Price (RM)</label>
-        <input class="text-input" type="number" name="food-price" value="0" step=0.05 required>
+        <label class="bold-label required-input" for="foodPrice">Price (RM)</label>
+        <input class="text-input" type="number" name="foodPrice" value="0" step=0.01
+ required>
         <!-- Food picture -->
-        <label class="bold-label required-input" for="food-image">Food picture</label>
+        <label class="bold-label required-input" for="foodImage">Food picture</label>
         <!-- upload food picture -->
         <!-- remember to add inside form: enctype="multipart/form-data" -->
-        <input type="file" name="food-image" accept="image/*" required>
+        <div>
+          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
+          <img id="preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_image']; ?>" alt="Preview">
+        </div>
         <!-- Add button -->
         <button class="btn submit-button" type="submit" name="submit" value="add-menu">Add</button>
       </form>
     </div>
   </div>
 </body>
-
+<script type="text/javascript">
+  /**
+   * Preview food image
+   */
+  function updateImageDisplay() {
+    const file = document.getElementById('input-food-image').files;
+    const preview = document.getElementById('preview');
+    for (const obj of file) {
+      preview.src = URL.createObjectURL(obj);
+    }
+  }
+</script>
 </html>

@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<?php
+/**
+ * Session
+ */
+// session_start();
+
+// $restaurantID = $_SESSION['restaurantID'];
+$restaurantID = 1;
+
+/**
+ * read menu item from database
+ */
+include 'actions/read_menu_item.php';
+$food_ID = $_GET['id'];
+?>
 <html lang="en">
 
 <head>
@@ -12,8 +27,6 @@
   <link rel="stylesheet" href="styles/restaurant_owner.css">
   <link rel="stylesheet" href="styles/menu_list.css">
   <link rel="stylesheet" href="styles/manage_menu_item.css">
-  <!-- javascript -->
-  <script src="scripts/add" charset="utf-8"></script>
   <!-- icon library | font awesome -->
   <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
@@ -39,7 +52,7 @@
     <nav id="nav-bar">
       <ul>
         <li><a class="nav-link" href="index.html#">Summary</a></li>
-        <li><a class="nav-link" href="menu-list.html">Menu List</a></li>
+        <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
         <li><a class="nav-link" href="order-list.html">Order List</a></li>
         <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
       </ul>
@@ -47,22 +60,26 @@
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <form class="user-input-form" action="<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
-        <?php
-        include 'actions/read_menu_item.php';
-        ?>
+      <!-- 
+        Form
+       -->
+      <form class="user-input-form" action="actions/update_menu_item.php?id=<?php echo $food_ID; ?>" method="post" enctype="multipart/form-data">
+
         <!-- Food title -->
-        <label class="bold-label required-input" for="food-title">Food title</label>
-        <input class="text-input" type="text" name="food-title" placeholder="Enter food title" value="<?php echo $row['food_title']; ?>" required>
+        <label class="bold-label required-input" for="foodTitle">Food title</label>
+        <input class="text-input" type="text" name="foodTitle" placeholder="Enter food title" value="<?php echo $row['food_title']; ?>" required>
         <!-- Food category -->
-        <label class="bold-label" for="food-category">Food category</label>
-        <select class="text-input required-input" name="food-category" required>
+        <label class="bold-label" for="foodCategory">Food category</label>
+        <!-- 
+          Show drop down by query table: food category
+         -->
+        <select class="text-input required-input" name="foodCategory" required>
           <?php
           if (mysqli_num_rows($result) > 0) {
             while ($row_fc = mysqli_fetch_assoc($result_fc)) {
               $foodCategoryID = $row_fc['food_category_ID'];
           ?>
-              <option value="<?php echo $foodCategoryID; ?>" <?php if ($foodCategoryID === $row['food_category_ID']) {echo "selected";} ?>>
+              <option value="<?php echo $foodCategoryID; ?>" <?php if ($foodCategoryID === $row['food_category_ID']) { echo "selected"; } // use attribute: selected ?>>
                 <?php echo $row_fc['category_name']; ?>
               </option>
           <?php
@@ -71,24 +88,42 @@
           ?>
         </select>
         <!-- Food description -->
-        <label class="bold-label required-input" for="food-description">Food description</label>
-        <textarea class="text-input" rows="5" cols="80"><?php echo $row['food_description']; ?></textarea>
+        <label class="bold-label required-input" for="foodDescription">Food description</label>
+        <textarea class="text-input" name="foodDescription" rows="5" cols="80"><?php echo $row['food_description']; ?></textarea>
         <!-- Price -->
-        <label class="bold-label required-input" for="food-price">Price (RM)</label>
-        <input class="text-input" type="number" name="food-price" value="<?php echo $row['food_price']; ?>" step=0.05 required>
+        <label class="bold-label required-input" for="foodPrice">Price (RM)</label>
+        <input class="text-input" type="number" name="foodPrice" value="<?php echo $row['food_price']; ?>" step=0.01
+ required>
         <!-- Food picture -->
-        <label class="bold-label required-input" for="food-image">Food picture</label>
+        <label class="bold-label" for="foodImage">Food picture</label>
         <!-- upload food picture -->
         <!-- remember to add inside form: enctype="multipart/form-data" -->
-        <input type="file" name="food-image" accept="image/*" value="<?php echo $row['food_image']; ?>" required>
-
+        <div>
+          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
+          <img id="preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_image']; ?>" alt="Preview">
+        </div>
+        <!-- button -->
         <div class="submit-button">
-          <button class="btn secondary-btn" type="button">Delete</button>
-          <button class="btn submit-button" type="submit" style="margin-left: 1rem;">Update</button>
+          <button class="btn secondary-btn" type="reset">Reset</button>
+          <a href="actions/delete_menu_item.php?id=<?php echo $food_ID; ?>"><button class="btn danger-button" type="button">Delete</button></a>
+          <button class="btn submit-button" type="submit">Update</button>
         </div>
       </form>
     </div>
   </div>
 </body>
+
+<script type="text/javascript">
+  /**
+   * Preview food image
+   */
+  function updateImageDisplay() {
+    const file = document.getElementById('input-food-image').files;
+    const preview = document.getElementById('preview');
+    for (const obj of file) {
+      preview.src = URL.createObjectURL(obj);
+    }
+  }
+</script>
 
 </html>

@@ -4,8 +4,11 @@
 /**
  * Establish database
  * db name: 'foody'
-*/
+ */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+session_start();
+include 'actions/alert_menu_status.php';
+session_destroy();
 ?>
 <html lang="en">
 
@@ -46,7 +49,7 @@ $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli
         <nav id="nav-bar">
             <ul>
                 <li><a class="nav-link" href="index.html#">Summary</a></li>
-                <li><a class="nav-link" href="menu-list.html">Menu List</a></li>
+                <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
                 <li><a class="nav-link" href="order-list.html">Order List</a></li>
                 <li><a class="nav-link" href="sales-report.html">Sales Report</a></li>
             </ul>
@@ -79,10 +82,10 @@ $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli
                 ?>
                         <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
                             <div>
-                                <img class="food-picture" src="assets/menu/<?php echo $row['restaurant_ID'].'/'.$row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
+                                <img class="food-picture" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
                                 <p class="food-title"> <?php echo $row['food_title']; ?> </p>
+                                <p> <?php echo $row['category_name'] ?> </p>
                                 <p class="food-desc"> <?php echo $row['food_description']; ?> </p>
-                                <p> <?php echo $row['food_category']; ?> </p>
                             </div>
                             <p class="food-price" onload="formatPrice()"> <?php echo $row['food_price']; ?> </p>
                         </a>

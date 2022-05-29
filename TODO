@@ -1,2 +1,9 @@
-change navbar link .html -> .php
-navbar can store in one php
+500 fix every contains: $restaurantID = 1;
+
+100 script in 'view menu item' move to external js
+000 navbar can store in one php
+
+x crud for menu list
+x change navbar link .html -> .php
+
+! cannot upload image, only store filename into database

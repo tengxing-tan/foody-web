@@ -4,6 +4,11 @@
  * db name: 'foody'
 */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
-$sql = "SELECT * FROM Food WHERE `restaurant_ID` = 1";
+
+/**
+ * read food detail
+ */
+$sql = "SELECT F.*, FC.category_name FROM `Food` F INNER JOIN FoodCategory FC WHERE F.food_category_ID = FC.food_category_ID";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-// print_r($result);
+// echo $sql;
+$row = mysqli_fetch_assoc($result);
