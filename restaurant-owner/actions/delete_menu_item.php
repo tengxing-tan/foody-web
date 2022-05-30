@@ -6,9 +6,9 @@
  */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
 /**
- * Session
+ * SESSION
  */
-// session_start();
+session_start();
 
 // $restaurantID = $_SESSION['restaurantID'];
 $restaurantID = 1;
@@ -28,6 +28,7 @@ $sql = "DELETE FROM `Food` WHERE food_ID = $foodID";
 // echo $sql;
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
 if ($result) {
     // echo 'delete ok';
     $_SESSION['status'] = 3;

@@ -5,13 +5,9 @@
  */
 session_start();
 
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
 // $restaurant_ID = $_SESSION['restaurant_ID'];
 $restaurant_ID = 1;
+include 'actions/read_menu_item.php';
 ?>
 
 <!DOCTYPE html>
@@ -50,14 +46,11 @@ $restaurant_ID = 1;
         <label class="bold-label required-input" for="foodCategory">Food category</label>
         <select class="text-input" name="foodCategory" required>
           <?php
-          $sql = "SELECT * FROM `FoodCategory`";
-          $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-          while ($row = mysqli_fetch_assoc($result)) {
-            //print each row
+          while ($row_fc = mysqli_fetch_assoc($result_fc)) {
+            $foodCategoryID = $row_fc['food_category_ID'];
           ?>
-            <option value="<?php echo $row['food_category_ID']; ?>">
-              <?php echo $row['category_name']; ?>
+            <option value="<?php echo $foodCategoryID; ?>">
+              <?php echo $row_fc['category_name']; ?>
             </option>
           <?php
           } // close while mysqli fetch

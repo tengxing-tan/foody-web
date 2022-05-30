@@ -5,6 +5,10 @@
  * db name: 'foody'
  */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+/**
+ * SESSION
+ */
+session_start();
 
 $restaurantID = $_GET['id'];
 $foodTitle = $_POST['foodTitle'];
@@ -53,9 +57,6 @@ $sql = "INSERT INTO `Food`(`restaurant_ID`, `food_title`, `food_category_ID`, `f
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-/**
- * Jump another page
- */
 if ($result) {
   // echo 'add item ok';
   $_SESSION['status'] = 1;
@@ -64,8 +65,11 @@ if ($result) {
   $_SESSION['status'] = 0;
 }
 
-// header('location: ../menu-list.php');
-// exit();
+/**
+ * Jump another page
+ */
+header('location: ../menu-list.php');
+exit();
 
 /**
  * Session => status
