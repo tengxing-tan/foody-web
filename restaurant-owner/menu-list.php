@@ -6,9 +6,17 @@
  * db name: 'foody'
  */
 $conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+
+/**
+ * Status
+ */
 session_start();
+// show alert message if user manage a menu item
 include 'actions/alert_menu_status.php';
 session_destroy();
+
+// read menu item from database
+include 'actions/read_menu_list.php';
 ?>
 <html lang="en">
 
@@ -45,9 +53,25 @@ session_destroy();
             <form class="one-line-form" action="index.html" method="post">
                 <div>
                     <label class="bold-label">Food Categories</label>
-                    <input class="btn" type="button" name="main-dishes" value="Main dishes">
-                    <input class="btn secondary-btn" type="button" name="side-dishes" value="Side dishes" style="margin-left: 1rem;">
-                    <input class="btn secondary-btn" type="button" name="drinks" value="Drinks" style="margin-left: 1rem;">
+                    <!-- 
+                        filter: show all item
+                     -->
+                    <button class="filter btn" type="button" value="all" onclick="filterFc(this.value)">All</button>
+
+                    <?php
+                    while ($rowFc = mysqli_fetch_array($resultFc)) {
+                        /**
+                         * generate food category button
+                         * filter food category
+                         */
+                    ?>
+                        <button class="filter btn secondary-btn" type="button" value="<?php echo $rowFc['food_category_ID']; ?>" onclick="filterFc(this.value)">
+                            <?php echo $rowFc['category_name']; ?>
+                        </button>
+
+                    <?php
+                    } // close while
+                    ?>
                 </div>
             </form>
 
@@ -56,20 +80,22 @@ session_destroy();
              -->
             <div class="menu-list">
                 <?php
-                include 'actions/read_menu_list.php';
-
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         //print each row
                 ?>
                         <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
+                            <!-- 
+                                Store food category id for filter purpose
+                             -->
+                            <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
                             <div>
                                 <img class="food-picture" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
-                                <p class="food-title"> <?php echo $row['food_title']; ?> </p>
-                                <p> <?php echo $row['category_name'] ?> </p>
-                                <p class="food-desc"> <?php echo $row['food_description']; ?> </p>
+                                <p class="food-title"><?php echo $row['food_title']; ?></p>
+                                <p class="food-category secondary-btn"><?php echo $row['category_name'] ?></p>
+                                <p class="food-desc"><?php echo $row['food_description']; ?></p>
                             </div>
-                            <p class="food-price" onload="formatPrice()"> <?php echo $row['food_price']; ?> </p>
+                            <p class="food-price" onload="formatPrice()"><?php echo $row['food_price']; ?></p>
                         </a>
                 <?php
                     } // close while

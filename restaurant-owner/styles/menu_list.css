@@ -40,6 +40,12 @@
     color: inherit;
     text-decoration: none;
 }
+.food-category {
+    display: block;
+    background-color: var(--primary-bg);
+    padding: 0.25rem 0.5rem;
+    width: max-content;
+}
 .food-picture {
     display: block;
     background-color: var(--gray-bg);

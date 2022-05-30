@@ -1,4 +1,3 @@
-(sql) menu list: filer food category
 order list
     - html
     - sql: order status
@@ -24,5 +23,6 @@ dashboard (so sales report first)
 x 000 navbar can store in one php
 x crud for menu list
 x change navbar link .html -> .php
+x (js) menu list: filer food category
 
 ! cannot upload image, only store filename into database
