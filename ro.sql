@@ -49,7 +49,7 @@ CREATE TABLE `FoodCategory` (
 
 CREATE TABLE `Restaurant` (
   `restaurant_ID` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `ro_ID` int(10) NOT NULL   REFERENCES RestaurantOwner(`ro_ID`),
+  `ro_ID` int(10) NOT NULL,
   `restaurant_name` varchar(100) NOT NULL,
   `restaurant_imgae` varchar(255) NOT NULL,
   `restaurant_description` text NOT NULL,

@@ -5,7 +5,7 @@ function filterFc(showFc) {
     // show all item
     if (showFc === 'all') {
         for (let i = 0; i < fcId.length; i++) {
-            fcId[i].parentElement.style.display = "block";
+            fcId[i].parentElement.style.display = "flex";
         }
     } else {
 
@@ -15,7 +15,7 @@ function filterFc(showFc) {
 
                 fcId[i].parentElement.style.display = "none";
             } else {
-                fcId[i].parentElement.style.display = "block";
+                fcId[i].parentElement.style.display = "flex";
             }
             // console.log(fcId[i].innerHTML, showFc, fcId[i].innerHTML !== showFc);
         }
