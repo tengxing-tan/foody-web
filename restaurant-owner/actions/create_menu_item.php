@@ -4,7 +4,7 @@
  * Establish database
  * db name: 'foody'
  */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
 /**
  * SESSION
  */
@@ -52,7 +52,7 @@ echo $msg;
 /**
  * mysql Qeury
  */
-$sql = "INSERT INTO `Food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`) " .
+$sql = "INSERT INTO `food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`) " .
   "VALUES ('$restaurantID','$foodTitle','$foodCategory','$foodDescription','$foodImage','$foodPrice')";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));

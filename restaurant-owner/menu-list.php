@@ -5,7 +5,7 @@
  * Establish database
  * db name: 'foody'
  */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
 
 /**
  * Status
@@ -92,7 +92,7 @@ include 'actions/read_menu_list.php';
                             <div>
                                 <img class="food-picture preview" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
                                 <p class="food-title"><?php echo $row['food_title']; ?></p>
-                                <p class="food-category secondary-btn"><?php echo $row['category_name'] ?></p>
+                                <p class="food-category"><?php echo $row['category_name'] ?></p>
                                 <p class="food-desc"><?php echo $row['food_description']; ?></p>
                             </div>
                             <p class="food-price" onload="formatPrice()"><?php echo $row['food_price']; ?></p>

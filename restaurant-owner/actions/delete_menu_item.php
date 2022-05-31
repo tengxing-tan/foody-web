@@ -4,7 +4,7 @@
  * Establish database
  * db name: 'foody'
  */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
 /**
  * SESSION
  */
@@ -24,7 +24,7 @@ $foodImage = $_FILES['foodImage']['name'];
 $updateFoodImage = (is_uploaded_file($foodImage)) ? "`food_image`='$foodImage'," : "";
     
 
-$sql = "DELETE FROM `Food` WHERE food_ID = $foodID";
+$sql = "DELETE FROM `food` WHERE food_ID = $foodID";
 // echo $sql;
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));

@@ -10,7 +10,7 @@ sales report
     - graph: https://www.w3schools.com/js/js_graphics_chartjs.asp
     - qr code
 restaurant owner
-    - html
+    x- html
     - register
     - update
 dashboard (so sales report first)
