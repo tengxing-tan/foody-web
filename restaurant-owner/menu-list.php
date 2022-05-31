@@ -47,13 +47,13 @@ include 'actions/read_menu_list.php';
 
         <!-- main content (right side) -->
         <div id="main-content">
-            <!-- 
+            <!--
                 FOOD CATOGORIES
              -->
             <form class="one-line-form" action="index.html" method="post">
                 <div>
                     <label class="bold-label">Food Categories</label>
-                    <!-- 
+                    <!--
                         filter: show all item
                      -->
                     <button class="filter btn" type="button" value="all" onclick="filterFc(this.value)">All</button>
@@ -75,22 +75,22 @@ include 'actions/read_menu_list.php';
                 </div>
             </form>
 
-            <!-- 
+            <!--
                 SHOW MENU LIST
              -->
-            <div class="menu-list">
+            <div class="menu-list" style="margin-bottom: 5rem;">
                 <?php
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         //print each row
                 ?>
                         <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
-                            <!-- 
+                            <!--
                                 Store food category id for filter purpose
                              -->
                             <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
                             <div>
-                                <img class="food-picture" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
+                                <img class="food-picture preview" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
                                 <p class="food-title"><?php echo $row['food_title']; ?></p>
                                 <p class="food-category secondary-btn"><?php echo $row['category_name'] ?></p>
                                 <p class="food-desc"><?php echo $row['food_description']; ?></p>
@@ -102,7 +102,7 @@ include 'actions/read_menu_list.php';
                 } // close if
                 ?>
 
-                <!-- 
+                <!--
                     HTML EXAMPLE: MENU ITEM
                 -->
                 <!-- <a class="menu-item" href="view-menu-item.php">

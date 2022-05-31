@@ -10,7 +10,7 @@
     } elseif ($_SESSION['status'] == 0) {
         echo "alert('Not working.');";
     } elseif ($_SESSION['status'] == 1) {
-        echo "alert('Successful update 1 item.');";
+        echo "alert('1 item added.');";
     } elseif ($_SESSION['status'] == 2) {
         echo "alert('1 item updated.');";
     } elseif ($_SESSION['status'] == 3) {

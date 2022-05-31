@@ -44,6 +44,7 @@
     display: block;
     background-color: var(--gray-bg);
     width: 100%;
+    max-width: 14rem;
     height: 10rem;
     border-radius: 10px;
     margin-bottom: 0.5rem;

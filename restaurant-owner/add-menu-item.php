@@ -23,6 +23,8 @@ include 'actions/read_menu_item.php';
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="styles/restaurant_owner.css">
   <link rel="stylesheet" href="styles/manage_menu_item.css">
+  <!-- javascript -->
+  <script src="./scripts/Preview.js" type="text/javascript"></script>
   <!-- icon library | font awesome -->
   <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
@@ -66,9 +68,9 @@ include 'actions/read_menu_item.php';
         <label class="bold-label required-input" for="foodImage">Food picture</label>
         <!-- upload food picture -->
         <!-- remember to add inside form: enctype="multipart/form-data" -->
-        <div>
-          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
-          <img id="preview" src="" alt="Preview">
+        <div style="display: inline-flex; flex-direction: column; align-items: start; width: 14rem;">
+          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()" style="margin-bottom: 1rem;">
+          <img id="preview" class="food-picture preview" src="" alt="Preview">
         </div>
         <!-- Add button -->
         <button class="btn submit-button" type="submit" name="submit" value="add-menu">Add</button>
@@ -76,17 +78,5 @@ include 'actions/read_menu_item.php';
     </div>
   </div>
 </body>
-<script type="text/javascript">
-  /**
-   * Preview food image
-   */
-  function updateImageDisplay() {
-    const file = document.getElementById('input-food-image').files;
-    const preview = document.getElementById('preview');
-    for (const obj of file) {
-      preview.src = URL.createObjectURL(obj);
-    }
-  }
-</script>
 
 </html>

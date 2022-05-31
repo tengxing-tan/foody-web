@@ -3,7 +3,7 @@ CONTAINER, TWO PAGE LAYOUT
 */
 .two-pages-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(10rem,50rem) minmax(40rem, 50rem);
   min-height: 100%;
 }
 .left-page {
@@ -55,6 +55,7 @@ FORM
 /* LABEL */
 .bold-label {
   font-weight: bold;
+  padding: 0 1rem;
 }
 .bold-label::after {
   content: ':';

@@ -37,10 +37,10 @@
             <div class="order-list-container">
                 <div class="order-status-menu">
                     <ul>
+                        <li><i class="fa-solid fa-clock" style="margin-right: 0.5rem"></i> Preparing</li>
+                        <li><i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem"></i> Prepared</li>
+                        <li><i class="fa-solid fa-check" style="margin-right: 0.5rem"></i> Complete</li>
                         <li><i class="fa-solid fa-clipboard" style="margin-right: 0.5rem"></i> All</li>
-                        <li><i class="fa-solid fa-clock" style="margin-right: 0.5rem"></i> Pending</li>
-                        <li><i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem"></i> Delivering</li>
-                        <li><i class="fa-solid fa-check" style="margin-right: 0.5rem"></i> Confirmed</li>
                     </ul>
                 </div>
                 <div class="order-list">
