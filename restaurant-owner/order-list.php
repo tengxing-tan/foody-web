@@ -1,4 +1,18 @@
 <!DOCTYPE html>
+<?php
+/**
+ * SESSION
+ */
+session_start();
+// $restaurantID = $_SESSION['restaurant_ID'];
+$restaurantID = 1;
+session_destroy();
+
+/**
+ * read order from database
+ */
+include 'actions/read_order.php';
+?>
 
 <html lang="en">
 
@@ -11,8 +25,7 @@
     <!-- external stylesheet -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="styles/restaurant_owner.css">
-    <link rel="stylesheet" href="styles/menu_list.css">
-    <link rel="stylesheet" href="styles/order_list.css">
+    <link rel="stylesheet" href="styles/report.css">
     <!-- javascript -->
     <script src="scripts/MenuList.js" charset="utf-8"></script>
     <!-- icon library | font awesome -->
@@ -30,98 +43,58 @@
 
         <!-- main content (right side) -->
         <div id="main-content">
-            <form class="one-line-form" action="index.html" method="post">
-                <input id="search-bar" type="date" name="order-date">
-                <button type="submit" name="search" class="btn" style="margin-left: 1rem;">Search</button>
-            </form>
-
-            <div class="order-list-container">
-                <div class="order-status-menu">
-                    <ul>
-                        <li><i class="fa-solid fa-clock" style="margin-right: 0.5rem"></i> Preparing</li>
-                        <li><i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem"></i> Prepared</li>
-                        <li><i class="fa-solid fa-check" style="margin-right: 0.5rem"></i> Complete</li>
-                        <li><i class="fa-solid fa-clipboard" style="margin-right: 0.5rem"></i> All</li>
-                    </ul>
+            <div class="one-line-form">
+                <div>
+                    <a href="?id=1"><button class="btn secondary-btn">Days</button></a>
+                    <a href="?id=2"><button class="btn secondary-btn">Weeks</button></a>
+                    <a href="?id=3"><button class="btn secondary-btn">Months</button></a>
                 </div>
-                <div class="order-list">
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
+            </div>
 
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
-
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
-
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
-
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
+            <div class="report-table">
+                <!-- Header row -->
+                <div class="report-header-row report-row" style="grid-template-columns: repeat(5, 1fr);">
+                <!-- label of duration -->
+                    <label><?php echo $durationType; ?></label>
+                    <label>Total Order</label>
+                    <label>Total Payment (RM)</label>
+                    <label>Total Commission<br />to Foody (RM)</label>
+                    <label>Total Commission<br />to Rider (RM)</label>
                 </div>
+
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if (isset($row['order_date'])) {
+                        $duration = $row['order_date'];
+                    } elseif (isset($row['WEEK(`order_date`)'])) {
+                        $duration = $row['WEEK(`order_date`)'];
+                    } else {
+                        // it's month
+                        $duration = $row['MONTHNAME(`order_date`)'];
+                    }
+                ?>
+                    <!-- row -->
+                    <div class="report-row" style="grid-template-columns: repeat(5, 1fr);">
+                        <span><?php echo $duration; ?></span>
+                        <span><?php echo $row['COUNT(`order_ID`)']; ?></span>
+                        <span><?php echo $row['SUM(`total_amount`)']; ?></span>
+                        <span><?php echo $row['COUNT(`order_ID`)'] * 1.50; ?></span>
+                        <span><?php echo $row['COUNT(`order_ID`)'] * 5; ?></span>
+                    </div>
+                <?php
+                } // close white
+                ?>
+
+                <!-- 
+                    HTML example: row
+                 -->
+                <!-- <div class="report-row"  style="grid-template-columns: repeat(5, 1fr);">
+                    <span>2022-05-01</span>
+                    <span>2000</span>
+                    <span>9000</span>
+                    <span>500</span>
+                    <span>500</span>
+                </div> -->
             </div>
         </div>
     </div>

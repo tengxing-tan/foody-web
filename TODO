@@ -1,14 +1,6 @@
 order list
     - html
     - sql: order status
-calc order module
-    - html
-    - sql: day, week, moth
-    - sql: search date
-sales report
-    - html
-    - graph: https://www.w3schools.com/js/js_graphics_chartjs.asp
-    - qr code
 restaurant owner
     - view profile
 dashboard (so sales report first)
@@ -22,5 +14,13 @@ x 000 navbar can store in one php
 x crud for menu list
 x change navbar link .html -> .php
 x (js) menu list: filer food category
+x sales report
+    - html
+    - graph: https://www.w3schools.com/js/js_graphics_chartjs.asp
+    - qr code
+x calc order module
+    - html
+    - sql: day, week, moth
+    - sql: search date
 
 ! cannot upload image, only store filename into database
