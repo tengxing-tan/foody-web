@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <?php
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
+include 'db_connect.php';
 /**
  * SESSION
  */
 session_start();
-
-$restaurantID = $_GET['id'];
+// $restaurantID = 3;
+$restaurantID = $_SESSION['restaurantID'];
 $foodTitle = $_POST['foodTitle'];
 $foodCategory = $_POST['foodCategory'];
 $foodDescription = $_POST['foodDescription'];
@@ -26,6 +22,19 @@ $target_file = "../assets/menu/$restaurantID/" . $foodImage;
 
 $foodImage = $_FILES["foodImage"]["name"];
 $tempname = $_FILES["foodImage"]["tmp_name"];
+
+/**
+ * Create folder for new restaurant
+ */
+if (is_dir("../assets/menu/$restaurantID")) {
+  echo 'restaurant folder exist';
+} else {
+  if (mkdir("../assets/menu/".$restaurantID, 0777, true)) {
+    echo 'make directory successfully';
+  } else {
+    echo "failed. I want to create directory at ../assets/menu/".$restaurantID;
+  }
+}
 $folder = "../assets/menu/$restaurantID/" . $foodImage;
 
 
@@ -61,7 +70,7 @@ if ($result) {
   // echo 'add item ok';
   $_SESSION['status'] = 1;
 } else {
-  // echo $sql;
+  // echo 'filename exists';
   $_SESSION['status'] = 0;
 }
 

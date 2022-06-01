@@ -1,5 +1,15 @@
 <!DOCTYPE html>
+<?php
+
+/**
+ * SESSION
+ */
+session_start();
+// $_SESSION['restaurantID'] = $_POST['restaurantID'];
+$_SESSION['restaurantID'] = 1;
+?>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,20 +25,11 @@
   <!-- icon library | font awesome -->
   <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
-<body onload="init()">
-  <!-- title bar -->
-  <div id="title-bar">
-    <!-- foody logo -->
-    <a id="foody-link" class="icon-link" href="#index.html">Foody</a>
 
-    <!-- user profile -->
-    <div>
-      <a class="icon-link" href="#">
-        Rider
-        <i class="fa-solid fa-user"></i>
-      </a>
-    </div>
-  </div>
+<body onload="init()">
+  <header>
+    <?php include 'assets/reusable/header.php'; ?>
+  </header>
 
   <!-- content -->
   <div id="content-wrapper">
@@ -139,4 +140,5 @@
     </div>
   </div>
 </body>
+
 </html>

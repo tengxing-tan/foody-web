@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <?php
-// Establish MySQL connection
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
 
 /**
- * Status
+ * SESSION
  */
 session_start();
+// $restaurantID = $_SESSION['restaurant_ID'];
+$restaurantID = 1;
+
 // show alert message if user manage a menu item
 include 'actions/alert_menu_status.php';
 session_destroy();
@@ -82,6 +79,7 @@ include 'actions/read_menu_list.php';
                 <?php
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        $foodImagePath = "assets/menu/$restaurantID/".$row['food_image'];
                         //print each row
                 ?>
                         <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
@@ -90,7 +88,8 @@ include 'actions/read_menu_list.php';
                              -->
                             <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
                             <div>
-                                <img class="food-picture preview" src="assets/menu/<?php echo $row['restaurant_ID'] . '/' . $row['food_image']; ?>" alt="<?php echo $row['food_title']; ?>">
+                                <img class="food-picture preview" src="<?php echo (file_exists($foodImagePath)) ? $foodImagePath : 'assets/image/food_picture.png'; ?>" alt="<?php echo $row['food_title']; ?>">
+                                <!-- <img class="food-picture preview" src="<?php echo "assets/menu/$restaurantID/".$row['food_picture']; ?>" alt="<?php echo $row['food_title']; ?>"> -->
                                 <p class="food-title"><?php echo $row['food_title']; ?></p>
                                 <p class="food-category"><?php echo $row['category_name'] ?></p>
                                 <p class="food-desc"><?php echo $row['food_description']; ?></p>

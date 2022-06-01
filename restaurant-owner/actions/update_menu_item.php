@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foodydb", "3306") or die(mysqli_connect_error());
+include 'db_connect.php';
 /**
  * Session
  */

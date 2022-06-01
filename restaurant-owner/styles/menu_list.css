@@ -1,18 +1,4 @@
 /*
-    CIRCLE ADD BUTTON
-*/
-.add-button {
-    background-color: var(--primary-bg);
-    color: white;
-    width: 4rem;
-    height: 4rem;
-    border: none;
-    border-radius: 50%;
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-}
-/*
     MENU LIST
 */
 .menu-list {

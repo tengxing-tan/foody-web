@@ -2,7 +2,7 @@
 <!-- title bar -->
 <div id="title-bar">
     <!-- foody logo -->
-    <a id="foody-link" class="icon-link" href="index.html#">Foody</a>
+    <a id="foody-link" class="icon-link" href="index.php">Foody</a>
 
     <!-- user profile -->
     <div>

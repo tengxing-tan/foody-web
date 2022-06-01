@@ -1,3 +1,6 @@
+table, add row:
+    restaurant: contact, operating_hour_open, operating_hour_close
+(`restaurant_ID`, `ro_ID`, `restaurant_name`, `restaurant_image`, `restaurantType_ID`, `restaurant_descripton`, `restaurant_address`) 
 order list
     - html
     - sql: order status

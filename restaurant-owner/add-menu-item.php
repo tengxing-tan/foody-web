@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 /**
@@ -5,12 +6,11 @@
  */
 session_start();
 
-// $restaurant_ID = $_SESSION['restaurant_ID'];
-$restaurant_ID = 1;
+$restaurantID = $_SESSION['restaurant_ID'];
+// $restaurantID = 1;
 include 'actions/read_menu_item.php';
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -40,7 +40,7 @@ include 'actions/read_menu_item.php';
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <form class="user-input-form" action="actions/create_menu_item.php?id=<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
+      <form class="user-input-form" action="actions/create_menu_item.php" method="post" enctype="multipart/form-data">
         <!-- Food title -->
         <label class="bold-label required-input" for="foodTitle">Food title</label>
         <input class="text-input" type="text" name="foodTitle" placeholder="Enter food title" required>

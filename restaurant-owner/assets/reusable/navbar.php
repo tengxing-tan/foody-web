@@ -5,7 +5,7 @@
          <li><a class="nav-link" href="menu-list.php">Menu List</a></li>
          <li><a class="nav-link" href="order-list.php">Order List</a></li>
          <li><a class="nav-link" href="sales-report.php">Sales Report</a></li>
-         <li><a class="nav-link" href="create-my-restaurant.php">My Restaurant</a></li>
+         <li><a class="nav-link" href="my-restaurants.php">My Restaurant</a></li>
      </ul>
      <a href="index.php" class="nav-link" style="text-decoration: underline;">
         Logout

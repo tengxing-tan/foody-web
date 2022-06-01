@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <?php
 /**
- * Session
+ * SESSION
  */
-// session_start();
-
-// $restaurantID = $_SESSION['restaurantID'];
+session_start();
+// $restaurantID = $_SESSION['restaurant_ID'];
 $restaurantID = 1;
 
 /**
@@ -90,7 +89,7 @@ $food_ID = $_GET['id'];
         </div>
         <!-- button -->
         <div class="submit-button">
-          <button class="btn secondary-btn" type="reset">Reset</button>
+        <button class="btn secondary-btn" type="reset"><i class="fa fa-undo" style="font-size: inherit; margin: 0 4px 0;"></i>Reset</button>
           <a href="actions/delete_menu_item.php?id=<?php echo $food_ID; ?>"><button class="btn danger-button" type="button">Delete</button></a>
           <button class="btn submit-button" type="submit">Update</button>
         </div>

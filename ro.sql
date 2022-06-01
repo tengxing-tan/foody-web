@@ -47,14 +47,18 @@ CREATE TABLE `foodcategory` (
 -- Table structure for table `restaurant`
 --
 
+
 CREATE TABLE `restaurant` (
-  `restaurant_ID` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `ro_ID` int(10) NOT NULL,
-  `restaurant_name` varchar(100) NOT NULL,
-  `restaurant_imgae` varchar(255) NOT NULL,
-  `restaurant_description` text NOT NULL,
-  `restaurant_address` varchar(100) NOT NULL,
-  CONSTRAINT FK_RestaurantOwnerRestaurant FOREIGN KEY (`ro_ID`) REFERENCES RestaurantOwner(`ro_ID`)
+  `restaurant_ID` int(10) NOT NULL,
+  `ro_ID` varchar(10) NOT NULL,
+  `restaurant_name` varchar(30) NOT NULL,
+  `restaurantType_ID` int(10) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `restaurant_address` varchar(100) NOT NULL
+  `operating_hour_open` time NOT NULL,
+  `operating_hour_close` time NOT NULL,
+  `restaurant_descripton` text NOT NULL,
+  `restaurant_image` varchar(255) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

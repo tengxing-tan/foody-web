@@ -27,12 +27,3 @@ textarea {
     grid-column: 1 / 3;
     justify-self: end;
 }
-
-.preview {
-    display: block;
-    width: 14rem;
-    height: 14rem;;
-    background-image: url(../assets/image/food_picture.png);
-    background-color: grey;
-    border: 2px dashed darkgrey;
-}

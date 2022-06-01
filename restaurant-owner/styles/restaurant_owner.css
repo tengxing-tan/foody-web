@@ -60,3 +60,26 @@ FORM
 .bold-label::after {
   content: ':';
 }
+/* PREIVEW IMAGE */
+.preview {
+  display: block;
+  width: 14rem;
+  height: 14rem;;
+  background-image: url(../assets/image/food_picture.png);
+  background-color: grey;
+  border: 2px dashed darkgrey;
+}
+/*
+    CIRCLE ADD BUTTON
+*/
+.add-button {
+  background-color: var(--primary-bg);
+  color: white;
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}

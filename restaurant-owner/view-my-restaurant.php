@@ -1,3 +1,14 @@
+<?php
+
+/**
+ * SESSION
+ */
+session_start();
+// $restaurantID = $_SESSION['restaurant_ID'];
+$restaurantID = 1;
+
+include 'actions/read_restaurant.php'; 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,38 +39,59 @@
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <form class="user-input-form" action="actions/create_menu_item.php?id=<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
+      <?php $row = mysqli_fetch_assoc($result); ?>
+      <form class="user-input-form" action="actions/update_restaurant.php?id=<?php echo $restaurantID; ?>" method="post" enctype="multipart/form-data">
         <!-- Restaurant name -->
         <label class="bold-label required-input" for="restaurantName">Restaurant name</label>
-        <input class="text-input" type="text" name="restaurantName" placeholder="Enter restaurant name" required>
+        <input class="text-input" type="text" name="restaurantName" placeholder="Enter restaurant name" value="<?php echo $row['restaurant_name']; ?>" required>
+        <!-- Restaurant type -->
+        <label class="bold-label" for="restaurantType">Restaurant type</label>
+        <!--
+          Show drop down by query table: restaurant type
+         -->
+        <select class="text-input required-input" name="restaurantTypeID" required>
+          <?php
+          while ($row_rt = mysqli_fetch_assoc($result_rt)) {
+            $restaurantTypeID = $row_rt['restaurantType_ID'];
+          ?>
+            <option value="<?php echo $restaurantTypeID; ?>" <?php if ($restaurantTypeID === $row['restaurantType_ID']) {
+                                                                echo "selected";
+                                                              } // use attribute: selected
+                                                              ?>>
+              <?php echo $row_rt['restaurantType_name']; ?>
+            </option>
+          <?php
+          } // close while mysqli fetch
+          ?>
+        </select>
         <!-- Contact number -->
-        <label class="bold-label required-input" for="foodDescription">Contact number</label>
-        <input class="text-input" type="tel" name="foodDescription" placeholder="0107775555" required>
-        <!-- Restaurant owner -->
-        <label class="bold-label required-input" for="foodDescription">Restaurant owner</label>
-        <input class="text-input" type="text" name="restaurantName" placeholder="Your name" required>
+        <label class="bold-label required-input" for="contact">Contact number</label>
+        <input class="text-input" type="tel" name="contact" placeholder="0107775555" value="<?php echo $row['contact']; ?>" required>
         <!-- Restaurant address -->
         <label class="bold-label required-input" for="restaurantAddress">Restaurant address</label>
-        <textarea class="text-input" name="restaurantAddress" rows="5" cols="80">Enter restaurant address</textarea>
+        <textarea class="text-input" name="restaurantAddress" rows="5" cols="80"><?php echo $row['restaurant_address']; ?></textarea>
         <!-- Operating hour -->
-        <label class="bold-label required-input" for="operatingHour">Operating hour</label>
+        <label class="bold-label required-input">Operating hour</label>
         <div style="display: flex;">
-          <input class="text-input" type="time" name="operatingHour" required style="margin-right: 1rem;">
-          <input class="text-input" type="time" name="operatingHour" required>
+          <input class="text-input" type="time" name="operatingHourOpen" required style="margin-right: 1rem;" value="<?php echo $row['operating_hour_open']; ?>">
+          <input class="text-input" type="time" name="operatingHourClose" required value="<?php echo $row['operating_hour_open']; ?>">
         </div>
         <!-- Restaurant description -->
         <label class="bold-label" for="restaurantDescription">Restaurant description</label>
-        <textarea class="text-input" name="restaurantDescription" rows="5" cols="80">Enter restaurant description</textarea>
+        <textarea class="text-input" name="restaurantDescription" rows="5" cols="80"><?php echo $row['restaurant_description']; ?></textarea>
         <!-- Restaurant picture -->
-        <label class="bold-label" for="restaurantImage">Restaurant address</label>
+        <label class="bold-label" for="restaurantImage">Restaurant picture</label>
         <!-- remember to add inside form: enctype="multipart/form-data" -->
         <div style="display: inline-flex; flex-direction: column; align-items: start; width: 14rem;">
           <input type="file" id="restaurantImage" name="restaurantImage" accept="image/*" onchange="updateImageDisplay()" style="margin-bottom: 1rem;">
-          <img id="preview" class="preview" src="" alt="Preview">
+          <img id="preview" class="preview" src="assets/restaurant/<?php echo $restaurantID ?>/<?php echo $row['restaurant_image']; ?>" alt="Preview">
         </div>
 
-        <!-- Add button -->
-        <button class="btn submit-button" type="submit" name="submit" value="add-restaurant">Add</button>
+        <!-- button -->
+        <div class="submit-button">
+          <button class="btn secondary-btn" type="reset"><i class="fa fa-undo" style="font-size: inherit; margin: 0 4px 0;"></i>Reset</button>
+          <button class="btn submit-button" type="submit">Update</button>
+        </div>
       </form>
     </div>
   </div>
