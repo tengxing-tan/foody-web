@@ -112,8 +112,26 @@ INSERT INTO `foodcategory` (`food_category_ID`, `category_name`) VALUES
 -- Dumping data for table `restaurant`
 --
 
-INSERT INTO `restaurant` (`restaurant_ID`, `ro_ID`, `restaurant_name`, `restaurant_imgae`, `restaurant_description`, `restaurant_address`) VALUES
-(1, 1, 'hotdog', '../assets/tempura.png', 'no food', 'tan teng xing\r\ntan teng xing\r\ntan teng xing');
+CREATE TABLE `restaurant` (
+  `restaurant_ID` int(10) NOT NULL,
+  `ro_ID` int(10) NOT NULL,
+  `restaurant_name` varchar(30) NOT NULL,
+  `restaurantType_ID` int(10) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `restaurant_address` varchar(100) NOT NULL,
+  `operating_hour_open` time NOT NULL,
+  `operating_hour_close` time NOT NULL,
+  `restaurant_description` text NOT NULL,
+  `restaurant_image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `restaurant`
+--
+
+INSERT INTO `restaurant` (`restaurant_ID`, `ro_ID`, `restaurant_name`, `restaurantType_ID`, `contact`, `restaurant_address`, `operating_hour_open`, `operating_hour_close`, `restaurant_description`, `restaurant_image`) VALUES
+(1, 1, 'Sushi Mentai', 2, '016-778 9999', '9, Jalan Apa, Taman Apa, 65500 Pekan, Pahang', '08:37:46', '08:37:46', 'Sushi Restaurant', '../src/img/sushi-mentai.jpg');
+
 
 -- --------------------------------------------------------
 
