@@ -1,23 +1,23 @@
-function filterFc(showFc) {
-    const fcId = document.getElementsByClassName('food-category-id');
-    // console.log(fcId.length, "items");
+function filterOrderStatus(selectOrderStatus) {
+    const orderStatus = document.getElementsByClassName('order-status');
+    // console.log(orderStatus.length, "items");
 
     // show all item
-    if (showFc === 'all') {
-        for (let i = 0; i < fcId.length; i++) {
-            fcId[i].parentElement.style.display = "flex";
+    if (selectOrderStatus === 'all') {
+        for (let i = 0; i < orderStatus.length; i++) {
+            orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
         }
     } else {
 
         // show category: main,side dish, drink
-        for (let i = 0; i < fcId.length; i++) {
-            if (fcId[i].innerHTML !== showFc) {
+        for (let i = 0; i < orderStatus.length; i++) {
+            if (orderStatus[i].innerHTML !== selectOrderStatus) {
 
-                fcId[i].parentElement.style.display = "none";
+                orderStatus[i].parentElement.parentElement.parentElement.style.display = "none";
             } else {
-                fcId[i].parentElement.style.display = "flex";
+                orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
             }
-            // console.log(fcId[i].innerHTML, showFc, fcId[i].innerHTML !== showFc);
+            // console.log(orderStatus[i].innerHTML, selectOrderStatus, orderStatus[i].innerHTML !== showFc);
         }
     }
 
@@ -25,16 +25,16 @@ function filterFc(showFc) {
      * change button color
      */
     const filter = document.getElementsByClassName('filter');
-    console.log(filter);
+    // console.log(filter);
 
     for (let i = 0; i < filter.length + 1; i++) {
-        if (filter[i].value == showFc) {
+        if (filter[i].value == selectOrderStatus) {
 
-            filter[i].className = "filter btn"
+            filter[i].style.backgroundColor = 'var(--primary-color)';
         } else {
-            filter[i].className = "filter btn secondary-btn"
+            filter[i].style.backgroundColor = 'white';
         }
-        // console.log(typeof filter[i], showFc);
+        // console.log(typeof filter[i], selectOrderStatus);
         // console.log(filter[i].className)
     }
 }
