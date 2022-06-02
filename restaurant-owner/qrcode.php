@@ -5,8 +5,8 @@
  * SESSION
  */
 session_start();
-// $_SESSION['restaurantID'] = $_POST['restaurantID'];
-$_SESSION['restaurantID'] = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $_SESSION['restaurantID'] = 1;
 ?>
 <html lang="en">
 

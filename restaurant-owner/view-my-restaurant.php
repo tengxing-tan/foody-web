@@ -4,8 +4,8 @@
  * SESSION
  */
 session_start();
-// $restaurantID = $_SESSION['restaurant_ID'];
-$restaurantID = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
 
 include 'actions/read_restaurant.php'; 
 ?>

@@ -3,9 +3,16 @@
 include 'actions/db_connect.php';
 
 /**
+ * SESSION
+ */
+session_start();
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
+
+/**
  * query last month total amount
  */
-$sqlpayLastMonth = "SELECT COUNT(`order_ID`), WEEK(`order_date`), SUM(`total_amount`) FROM `order` GROUP BY WEEK(`order_date`) ORDER BY `order_date` DESC";
+$sqlpayLastMonth = "SELECT COUNT(`order_ID`), WEEK(`order_date`), SUM(`total_amount`) FROM `order` WHERE `restaurant_ID` = '$restaurantID' GROUP BY WEEK(`order_date`) ORDER BY `order_date` DESC";
 $resultPayLastMonth = mysqli_query($conn, $sqlpayLastMonth) or die(mysqli_error($conn));
 
 $sum = array();
@@ -17,7 +24,7 @@ while ($weekNo-- > 0 and $row = mysqli_fetch_array($resultPayLastMonth)) {
 /**
  * query total order
  */
-$sqlTotalOrder = "SELECT COUNT(`order_ID`), `order_date`, SUM(`total_amount`) FROM `order` GROUP BY `order_date` ORDER BY `order_date` DESC";
+$sqlTotalOrder = "SELECT COUNT(`order_ID`), `order_date`, SUM(`total_amount`) FROM `order` WHERE `restaurant_ID` = '$restaurantID' GROUP BY `order_date` ORDER BY `order_date` DESC";
 $resultTotalOrder = mysqli_query($conn, $sqlTotalOrder) or die(mysqli_error($conn));
 
 $totalOrder = array();
@@ -35,7 +42,7 @@ while ($dayNo-- > 0 and $row = mysqli_fetch_array($resultTotalOrder)) {
 /**
  * query total order
  */
-$sqlAccumPay = "SELECT YEAR(`order_date`), SUM(`total_amount`) FROM `order` GROUP BY YEAR(`order_date`) ORDER BY `order_date` ASC";
+$sqlAccumPay = "SELECT YEAR(`order_date`), SUM(`total_amount`) FROM `order` WHERE `restaurant_ID` = '$restaurantID' GROUP BY YEAR(`order_date`) ORDER BY `order_date` ASC";
 $resultAccumPay = mysqli_query($conn, $sqlAccumPay) or die(mysqli_error($conn));
 
 $year = array();

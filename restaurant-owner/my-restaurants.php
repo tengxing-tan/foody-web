@@ -7,8 +7,8 @@ include 'db_connect.php';
  * SESSION
  */
 session_start();
-// $restaurantID = $_SESSION['restaurant_ID'];
-$restaurantID = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
 
 // show alert message if user manage a menu item
 include 'actions/alert_menu_status.php';

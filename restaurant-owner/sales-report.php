@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <?php
+/**
+ * SESSION
+ */
+session_start();
+$restaurantID = $_SESSION['restaurantID'];
+// $_SESSION['restaurantID'] = 1;
+
 include 'actions/read_insight_info.php';
 ?>
 <html lang="en">

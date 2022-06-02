@@ -6,7 +6,7 @@
  */
 session_start();
 
-$restaurantID = $_SESSION['restaurant_ID'];
+$restaurantID = $_SESSION['restaurantID'];
 // $restaurantID = 1;
 include 'actions/read_menu_item.php';
 ?>
