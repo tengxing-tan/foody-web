@@ -64,7 +64,7 @@ include 'actions/read_restaurant.php';
 
         <!-- Contact number -->
         <label class="bold-label required-input" for="contact">Contact</label>
-        <input class="text-input" type="tel" name="contact" placeholder="0107775555" required>
+        <input class="text-input" type="tel" name="contact" placeholder="010-7775555" pattern="[0-9]{3}-*[0-9]{7,8}" required>
         <!-- Restaurant address -->
         <label class="bold-label required-input" for="restaurantAddress">Restaurant address</label>
         <textarea class="text-input" name="restaurantAddress" rows="5" cols="80">Enter restaurant address</textarea>

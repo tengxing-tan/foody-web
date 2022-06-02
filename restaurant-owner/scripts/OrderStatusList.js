@@ -17,10 +17,9 @@ function filterOrderStatus(selectOrderStatus) {
             } else {
                 orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
             }
-            // console.log(orderStatus[i].innerHTML, selectOrderStatus, orderStatus[i].innerHTML !== showFc);
+            // console.log(orderStatus[i].innerHTML, showFc, orderStatus[i].innerHTML !== showFc);
         }
     }
-
     /**
      * change button color
      */
@@ -30,9 +29,11 @@ function filterOrderStatus(selectOrderStatus) {
     for (let i = 0; i < filter.length + 1; i++) {
         if (filter[i].value == selectOrderStatus) {
 
-            filter[i].style.backgroundColor = 'var(--primary-color)';
+            filter[i].style.backgroundColor = 'var(--primary-bg)';
+            filter[i].style.color = 'white';
         } else {
             filter[i].style.backgroundColor = 'white';
+            filter[i].style.color = 'var(--primary-bg)';
         }
         // console.log(typeof filter[i], selectOrderStatus);
         // console.log(filter[i].className)

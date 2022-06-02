@@ -26,50 +26,9 @@ include 'actions/read_order_status.php';
     <link rel="stylesheet" href="styles/menu_list.css">
     <link rel="stylesheet" href="styles/order_list.css">
     <!-- javascript -->
-    <script src="scripts/MenuList.js" charset="utf-8"></script>
+    <script src="scripts/OrderStatusList.js" charset="utf-8"></script>
     <!-- icon library | font awesome -->
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
-    <script>
-        function filterOrderStatus(selectOrderStatus) {
-            const orderStatus = document.getElementsByClassName('order-status');
-            // console.log(orderStatus.length, "items");
-
-            // show all item
-            if (selectOrderStatus === 'all') {
-                for (let i = 0; i < orderStatus.length; i++) {
-                    orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
-                }
-            } else {
-
-                // show category: main,side dish, drink
-                for (let i = 0; i < orderStatus.length; i++) {
-                    if (orderStatus[i].innerHTML !== selectOrderStatus) {
-
-                        orderStatus[i].parentElement.parentElement.parentElement.style.display = "none";
-                    } else {
-                        orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
-                    }
-                    // console.log(orderStatus[i].innerHTML, showFc, orderStatus[i].innerHTML !== showFc);
-                }
-            }
-            /**
-             * change button color
-             */
-            const filter = document.getElementsByClassName('filter');
-            // console.log(filter);
-
-            for (let i = 0; i < filter.length + 1; i++) {
-                if (filter[i].value == selectOrderStatus) {
-
-                    filter[i].style.backgroundColor = 'black';
-                } else {
-                    filter[i].style.backgroundColor = 'white';
-                }
-                // console.log(typeof filter[i], selectOrderStatus);
-                // console.log(filter[i].className)
-            }
-        }
-    </script>
 </head>
 
 <body onload="filterOrderStatus('ordered')">
@@ -85,11 +44,13 @@ include 'actions/read_order_status.php';
         <div id="main-content">
 
             <div class="one-line-form">
-                <button class="filter btn secondary-btn" onclick="filterOrderStatus('ordered')"><i class="fa-solid fa-clipboard" style="margin-right: 0.5rem"></i>ordered</button>
-                <button class="filter btn secondary-btn" onclick="filterOrderStatus('preparing')"><i class="fa-solid fa-clock" style="margin-right: 0.5rem"></i>preparing</button>
-                <button class="filter btn secondary-btn" onclick="filterOrderStatus('prepared')"><i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem"></i>prepared</button>
-                <button class="filter btn secondary-btn" onclick="filterOrderStatus('completed')"><i class="fa-solid fa-check" style="margin-right: 0.5rem"></i>completed</button>
-                <button class="filter btn secondary-btn" onclick="filterOrderStatus('cancelled')"><i class="fa-solid fa-xmark" style="margin-right: 0.5rem"></i>cancelled</button>
+                <div>
+                    <button class="filter btn" onclick="filterOrderStatus(this.value)" value="ordered"><i class="fa-solid fa-clipboard" style="margin-right: 0.5rem"></i>ordered</button>
+                    <button class="filter btn" onclick="filterOrderStatus(this.value)" value="preparing"><i class="fa-solid fa-clock" style="margin-right: 0.5rem"></i>preparing</button>
+                    <button class="filter btn" onclick="filterOrderStatus(this.value)" value="prepared"><i class="fa-solid fa-paper-plane" style="margin-right: 0.5rem"></i>prepared</button>
+                    <button class="filter btn" onclick="filterOrderStatus(this.value)" value="completed"><i class="fa-solid fa-check" style="margin-right: 0.5rem"></i>completed</button>
+                    <button class="filter btn" onclick="filterOrderStatus(this.value)" value="cancelled"><i class="fa-solid fa-xmark" style="margin-right: 0.5rem"></i>cancelled</button>
+                </div>
             </div>
 
             <div class="order-list">
@@ -150,10 +111,10 @@ include 'actions/read_order_status.php';
                                 default:
                                     unset($actionButton);
                                     break;
-                                }
-                                if (isset($actionButton)) {
-                                    echo '<a href="actions/update_order_status.php?id=' . $row['order_ID'] . '&status=' . $actionButton.'"><button type="button" class="order-button complete-order-button">'.$actionButton.'</button></a>';
-                                }
+                            }
+                            if (isset($actionButton)) {
+                                echo '<a href="actions/update_order_status.php?id=' . $row['order_ID'] . '&status=' . $actionButton . '"><button type="button" class="order-button complete-order-button">' . $actionButton . '</button></a>';
+                            }
                             ?>
                         </div>
                     </div>

@@ -1,12 +1,10 @@
-restaurant owner
-    - view profile
 dashboard (so sales report first)
     - sql: order list, complete order
     - graph: daily earning
 
 (last compile) fix every contains: $restaurantID = 1;
-(if got time) script in 'view menu item' move to external js
 
+x script in 'view menu item' move to external js
 x 000 navbar can store in one php
 x crud for menu list
 x change navbar link .html -> .php
@@ -22,5 +20,7 @@ x calc order module
 x order list
     - html
     - sql: order status
+x restaurant owner
+    - view profile
 
 ! cannot upload image, only store filename into database

@@ -6,7 +6,7 @@
 
     <!-- user profile -->
     <div>
-        <a class="icon-link" href="view-my-restaurant.php">
+        <a class="icon-link" href="restaurant-owner-profile.php">
             Restaurant Owner
             <i class="fa-solid fa-user"></i>
         </a>
