@@ -23,7 +23,8 @@ include 'actions/read_insight_info.php';
     <link rel="stylesheet" href="styles/report.css">
 
     <!-- js chart -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 
     <!-- icon library | font awesome -->
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
@@ -70,12 +71,30 @@ include 'actions/read_insight_info.php';
                         }]
                     },
                     options: {
-                        legend: {
-                            display: false
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
                         },
                         title: {
                             display: false,
                             text: "Collected Payment Last Month"
+                        },
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: 'Week',
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'RM',
+                                }
+                            }
                         }
                     }
                 });
@@ -90,25 +109,36 @@ include 'actions/read_insight_info.php';
                     data: {
                         labels: xTotalOrder,
                         datasets: [{
-                            backgroundColor: '#5C4F712A',
+                            fill: true,
+                            backgroundColor: '#5C4F711A',
                             borderColor: barColors,
                             data: yTotalOrder
                         }]
                     },
                     options: {
-                        legend: {
-                            display: false
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
                         },
                         title: {
                             display: false,
                             text: "Number Of Orders Last Month"
                         },
                         scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date',
                                 }
-                            }]
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of orders',
+                                }
+                            }
                         }
                     }
                 });
@@ -127,16 +157,26 @@ include 'actions/read_insight_info.php';
                         }]
                     },
                     options: {
-                        legend: {
-                            display: false
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
                         },
                         responsive: true,
                         scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Year',
                                 }
-                            }]
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'RM',
+                                }
+                            }
                         }
                     }
                 });
