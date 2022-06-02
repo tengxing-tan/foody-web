@@ -10,8 +10,7 @@ $restaurantID = $_SESSION['restaurantID'];
 /**
  * read menu item from database
  */
-include 'actions/read_menu_item.php';
-$food_ID = $_GET['id'];
+include 'actions/read_order_status.php';
 ?>
 <html lang="en">
 
@@ -32,7 +31,7 @@ $food_ID = $_GET['id'];
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="init()">
+<body>
     <header>
         <?php include 'assets/reusable/header.php'; ?>
     </header>
@@ -57,83 +56,58 @@ $food_ID = $_GET['id'];
                         <li><i class="fa-solid fa-clipboard" style="margin-right: 0.5rem"></i> All</li>
                     </ul>
                 </div>
+
                 <div class="order-list">
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
+                    <?php
+                    while ($row = mysqli_fetch_assoc($result_order)) {
+                    ?>
+                        <div class="order-details-card">
+                            <div class="order-title">
+                                <div>
+                                    <span class="order-id"><?php echo $row['order_ID']; ?></span>
+                                    <p class="order-status"><?php echo $row['order_status']; ?></p>
+                                </div>
+                                <span class="order-date"><?php echo $row['order_date'] . ' ' . $row['order_time']; ?></span>
+                            </div>
 
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
+                            <div class="order-details">
+                                <?php
+                                // check if order had fetch before
+                                if (isset($firstItem)) {
+                                    if ($firstItem['order_ID'] === $row['order_ID']) {
+                                        echo "<p>" . $firstItem['food_title'] . "  x" . $firstItem['food_quantity'] . "</p>";
+                                    }
+                                }
+                                
+                                while ($row_ordered_food = mysqli_fetch_assoc($result_ordered_food)) {
+                                    // check order id
+                                    if ($row_ordered_food['order_ID'] == $row['order_ID']) {
+                                        echo "<p>" . $row_ordered_food['food_title'] . "  x" . $row_ordered_food['food_quantity'] . "</p>";
+                                    } else {
+                                        $firstItem = $row_ordered_food;
+                                    }
+                                } // close while
+                                ?>
+                            </div>
 
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
+                            <br />
 
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
+                            <!-- 
+                                Total amount
+                             -->
+                            <p>Total: <span class="food-price"><?php echo ' ' . $row['total_amount']; ?></span></p>
 
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
+                            <!-- 
+                                update order status
+                             -->
+                            <div class="order-action">
+                                <a href="<?php echo 'actions/update_order_status.php?id=' . $row['order_ID'] . '&status=cancelled'; ?>"><button type="button" class="order-button cancel-order-button">Cancel</button></a>
+                                <a href="<?php echo 'actions/update_order_status.php?id=' . $row['order_ID'] . '&status=preparing'; ?>"><button type="button" class="order-button complete-order-button">Confirm</button></a>
+                            </div>
                         </div>
-
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
-                    <div class="order-details-card">
-                        <div class="order-title">
-                            <span class="order-id">O001</span>
-                            <span class="order-date">2022-05-31 17:00:00</span>
-                        </div>
-
-                        <div class="order-details">
-                            <p>Nasi Goreng Kampung x1</p>
-                            <p>Nasi Goreng Ayam Merah x1</p>
-                            <p>Mee Goreng x1</p>
-                            <p>Teh ais x1</p>
-                        </div>
-
-                        <form class="order-action" method="post" action="#">
-                            <p class="order-status">Confirm</p>
-                            <button type="button" class="order-button cancel-order-button">Cancel</button>
-                            <button type="button" class="order-button complete-order-button">Confirm</button>
-                        </form>
-                    </div>
+                    <?php
+                    } // close while
+                    ?>
                 </div>
             </div>
         </div>

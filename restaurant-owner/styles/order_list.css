@@ -85,4 +85,6 @@
 }
 .order-status {
     font-weight: bold;
+    color: var(--primary-bg);
+    text-transform: capitalize;
 }
