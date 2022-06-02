@@ -15,9 +15,6 @@ include 'actions/read_insight_info.php';
     <link rel="stylesheet" href="styles/restaurant_owner.css">
     <link rel="stylesheet" href="styles/report.css">
 
-    <!-- javascript -->
-    <script src="scripts/Chart.js" type="text/javascript"></script>
-
     <!-- js chart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
@@ -26,31 +23,117 @@ include 'actions/read_insight_info.php';
 
     <script type="text/javascript">
         function init() {
-        const barColors = "#6C5A8A";
-        /**
-         * Chart payment last month
-         */
-        const xPaymentLastMonth = ["Week 1", "Week 2", "Week 3", "Week 4"];
-        const yPaymentLastMonth = <?php echo json_encode($sum) ?>;
-        document.getElementById('maxPayment').innerHTML = Math.max(...yPaymentLastMonth);
-        document.getElementById('minPayment').innerHTML = Math.min(...yPaymentLastMonth);
-        chartPaymentLastMonth();
+            const barColors = "#6C5A8A";
+            /**
+             * Chart payment last month
+             */
+            const xPaymentLastMonth = ["Week 1", "Week 2", "Week 3", "Week 4"];
+            const yPaymentLastMonth = <?php echo json_encode($sum) ?>;
+            document.getElementById('maxPayment').innerHTML = Math.max(...yPaymentLastMonth);
+            document.getElementById('minPayment').innerHTML = Math.min(...yPaymentLastMonth);
+            chartPaymentLastMonth();
 
-        /**
-         * Chart Total Order
-         */
-        const xTotalOrder = <?php echo json_encode($orderDate); ?>;
-        const yTotalOrder = <?php echo json_encode($totalOrder); ?>;
-        // console.log(yTotalOrder);
-        chartTotalOrder();
+            /**
+             * Chart Total Order
+             */
+            const xTotalOrder = <?php echo json_encode($orderDate); ?>;
+            const yTotalOrder = <?php echo json_encode($totalOrder); ?>;
+            // console.log(yTotalOrder);
+            chartTotalOrder();
 
-        /**
-         * Chart Acummalated payment since join foody
-         */
-        const xAccumPay = <?php echo json_encode($year); ?>;
-        const yAccumPay = <?php echo json_encode($accumPay); ?>;
-        // console.log(xAccumPay, yAccumPay);
-        chartAccumPay();
+            /**
+             * Chart Acummalated payment since join foody
+             */
+            const xAccumPay = <?php echo json_encode($year); ?>;
+            const yAccumPay = <?php echo json_encode($accumPay); ?>;
+            // console.log(xAccumPay, yAccumPay);
+            chartAccumPay();
+
+            /**
+             * Chart payment last month
+             */
+            function chartPaymentLastMonth() {
+                new Chart("chartPaymentLastMonth", {
+                    type: "bar",
+                    data: {
+                        labels: xPaymentLastMonth,
+                        datasets: [{
+                            backgroundColor: barColors,
+                            data: yPaymentLastMonth
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: false,
+                            text: "Collected Payment Last Month"
+                        }
+                    }
+                });
+            }
+
+            /**
+             * Chart Total Order
+             */
+            function chartTotalOrder() {
+                new Chart("chartTotalOrder", {
+                    type: "line",
+                    data: {
+                        labels: xTotalOrder,
+                        datasets: [{
+                            backgroundColor: '#5C4F712A',
+                            borderColor: barColors,
+                            data: yTotalOrder
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: false,
+                            text: "Number Of Orders Last Month"
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+            /**
+             * Chart Acummalated payment since join foody
+             */
+            function chartAccumPay() {
+                new Chart("chartAccumPay", {
+                    type: 'bar',
+                    data: {
+                        labels: xAccumPay,
+                        datasets: [{
+                            data: yAccumPay.reduce((pre, cur) => (pre + cur)),
+                            backgroundColor: barColors
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        responsive: true,
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
         }
     </script>
 </head>
