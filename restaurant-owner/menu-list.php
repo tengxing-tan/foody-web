@@ -26,6 +26,7 @@ include 'actions/read_menu_list.php';
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="./styles/restaurant_owner.css">
     <link rel="stylesheet" href="./styles/menu_list.css">
+    <link rel="stylesheet" href="./styles/alert_box.css">
     <!-- javascript -->
     <script src="scripts/MenuList.js" type="text/javascript"></script>
     <!-- icon library | font awesome -->
@@ -43,6 +44,14 @@ include 'actions/read_menu_list.php';
 
         <!-- main content (right side) -->
         <div id="main-content">
+            <div class="alert">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <?php
+                if (mysqli_num_rows($result) < 10) {
+                    echo 'Please add menu item to ensure at least 10 food items. [' . mysqli_num_rows($result) . '/10]';
+                } // close if
+                ?>
+            </div>
             <!--
                 FOOD CATOGORIES
              -->
@@ -76,28 +85,26 @@ include 'actions/read_menu_list.php';
              -->
             <div class="menu-list" style="margin-bottom: 5rem;">
                 <?php
-                if (mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $foodImagePath = "assets/menu/$restaurantID/".$row['food_image'];
-                        //print each row
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $foodImagePath = "assets/menu/$restaurantID/" . $row['food_image'];
+                    //print each row
                 ?>
-                        <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
-                            <!--
+                    <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
+                        <!--
                                 Store food category id for filter purpose
                              -->
-                            <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
-                            <div>
-                                <img class="food-picture preview" src="<?php echo (file_exists($foodImagePath)) ? $foodImagePath : 'assets/image/food_picture.png'; ?>" alt="<?php echo $row['food_title']; ?>">
-                                <!-- <img class="food-picture preview" src="<?php echo "assets/menu/$restaurantID/".$row['food_picture']; ?>" alt="<?php echo $row['food_title']; ?>"> -->
-                                <p class="food-title"><?php echo $row['food_title']; ?></p>
-                                <p class="food-category"><?php echo $row['category_name'] ?></p>
-                                <p class="food-desc"><?php echo $row['food_description']; ?></p>
-                            </div>
-                            <p class="food-price" onload="formatPrice()"><?php echo $row['food_price']; ?></p>
-                        </a>
+                        <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
+                        <div>
+                            <img class="food-picture preview" src="<?php echo (file_exists($foodImagePath)) ? $foodImagePath : 'assets/image/food_picture.png'; ?>" alt="<?php echo $row['food_title']; ?>">
+                            <!-- <img class="food-picture preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_picture']; ?>" alt="<?php echo $row['food_title']; ?>"> -->
+                            <p class="food-title"><?php echo $row['food_title']; ?></p>
+                            <p class="food-category"><?php echo $row['category_name'] ?></p>
+                            <p class="food-desc"><?php echo $row['food_description']; ?></p>
+                        </div>
+                        <p class="food-price" onload="formatPrice()"><?php echo $row['food_price']; ?></p>
+                    </a>
                 <?php
-                    } // close while
-                } // close if
+                } // close while
                 ?>
 
                 <!--
