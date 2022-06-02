@@ -6,7 +6,6 @@
 session_start();
 $restaurantID = $_SESSION['restaurantID'];
 // $restaurantID = 1;
-session_destroy();
 
 /**
  * read order from database

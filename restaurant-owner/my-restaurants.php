@@ -12,7 +12,6 @@ $restaurantID = $_SESSION['restaurantID'];
 
 // show alert message if user manage a menu item
 include 'actions/alert_menu_status.php';
-session_destroy();
 
 // read menu item from database
 include 'actions/read_restaurant.php';

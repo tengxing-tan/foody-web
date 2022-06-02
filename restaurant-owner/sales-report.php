@@ -53,7 +53,7 @@ include 'actions/read_insight_info.php';
              */
             const xAccumPay = <?php echo json_encode($year); ?>;
             const yAccumPay = <?php echo json_encode($accumPay); ?>;
-            // console.log(xAccumPay, yAccumPay);
+            console.log(xAccumPay, yAccumPay);
             chartAccumPay();
 
             /**
@@ -122,7 +122,7 @@ include 'actions/read_insight_info.php';
                     data: {
                         labels: xAccumPay,
                         datasets: [{
-                            data: yAccumPay.reduce((pre, cur) => (pre + cur)),
+                            data: yAccumPay.map((sum => value => sum += value)(0)),
                             backgroundColor: barColors
                         }]
                     },
@@ -161,7 +161,7 @@ include 'actions/read_insight_info.php';
             Last payment (lowest and highest)
          -->
             <div class="white-card">
-                <h3 style="margin-bottom: 2.5rem;">Accumalated Received Payment Since Joined Foody</h3>
+                <h3 style="margin-bottom: 2.5rem;">Collected Payment Last Month</h3>
                 <canvas id="chartPaymentLastMonth" style="width:100%;max-width:700px"></canvas>
 
                 <div style="width: 100%; display: flex; flex-direction: column; justify-content: start;">
@@ -174,7 +174,7 @@ include 'actions/read_insight_info.php';
                 Total order
              -->
             <div class="white-card">
-                <h3 style="margin-bottom: 2.5rem;">Accumalated Received Payment Since Joined Foody</h3>
+                <h3 style="margin-bottom: 2.5rem;">Number Of Orders Last Month</h3>
                 <canvas id="chartTotalOrder" style="width:100%;max-width:700px"></canvas>
             </div>
 
