@@ -56,8 +56,9 @@ include 'actions/read_insight_info.php';
              * Chart Acummalated payment since join foody
              */
             const xAccumPay = <?php echo json_encode($year); ?>;
-            const yAccumPay = <?php echo json_encode($accumPay); ?>;
-            console.log(xAccumPay, yAccumPay);
+            let yAccumPay = <?php echo json_encode($accumPay); ?>.map(x => parseInt(x));
+            yAccumPay = yAccumPay.map((x, i, arr) => ((i === 0) ? x : x + arr[i-1]));
+
             chartAccumPay();
 
             /**
@@ -155,7 +156,7 @@ include 'actions/read_insight_info.php';
                     data: {
                         labels: xAccumPay,
                         datasets: [{
-                            data: yAccumPay.map((sum => value => sum += value)(0)),
+                            data: yAccumPay,
                             backgroundColor: barColors
                         }]
                     },
