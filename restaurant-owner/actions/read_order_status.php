@@ -5,7 +5,7 @@ include 'db_connect.php';
 /**
  * read order
  */
-$sql = "SELECT `order_ID`, `order_date`, `order_time`, `order_status`, `total_amount` FROM `order` WHERE `restaurant_ID` = '$restaurantID'";
+$sql = "SELECT `order_ID`, `order_date`, `order_time`, `order_status`, `total_amount` FROM `order` WHERE `restaurant_ID` = '$restaurantID' ORDER BY `order_date` DESC, `order_time` DESC";
 // echo $sql;
 
 $result_order = mysqli_query($conn, $sql) or die(mysqli_error($conn));

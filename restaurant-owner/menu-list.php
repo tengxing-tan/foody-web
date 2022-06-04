@@ -44,14 +44,16 @@ include 'actions/read_menu_list.php';
 
         <!-- main content (right side) -->
         <div id="main-content">
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <?php
-                if (mysqli_num_rows($result) < 10) {
-                    echo 'Please add menu item to ensure at least 10 food items. [' . mysqli_num_rows($result) . '/10]';
-                } // close if
-                ?>
-            </div>
+            <?php
+            if (mysqli_num_rows($result) < 10) {
+            ?>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    Please add menu item to ensure at least 10 food items. [<?php mysqli_num_rows($result); ?>/10]
+                </div>
+            <?php
+            } // close if
+            ?>
             <!--
                 FOOD CATOGORIES
              -->

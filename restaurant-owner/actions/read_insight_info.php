@@ -44,6 +44,7 @@ while ($dayNo-- > 0 and $row = mysqli_fetch_array($resultTotalOrder)) {
  */
 $sqlAccumPay = "SELECT YEAR(`order_date`), SUM(`total_amount`) FROM `order` WHERE `restaurant_ID` = '$restaurantID' GROUP BY YEAR(`order_date`) ORDER BY `order_date` ASC";
 $resultAccumPay = mysqli_query($conn, $sqlAccumPay) or die(mysqli_error($conn));
+// print_r($resultAccumPay);
 
 $year = array();
 $accumPay = array();
