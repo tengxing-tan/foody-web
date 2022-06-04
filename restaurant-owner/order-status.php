@@ -26,12 +26,13 @@ include 'actions/read_order_status.php';
     <link rel="stylesheet" href="styles/menu_list.css">
     <link rel="stylesheet" href="styles/order_list.css">
     <!-- javascript -->
+    <script src="scripts/RestaurantOwner.js" charset="utf-8"></script>
     <script src="scripts/OrderStatusList.js" charset="utf-8"></script>
     <!-- icon library | font awesome -->
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="filterOrderStatus('ordered')">
+<body onload="activeNav('3'); filterOrderStatus('ordered');">
     <header>
         <?php include 'assets/reusable/header.php'; ?>
     </header>

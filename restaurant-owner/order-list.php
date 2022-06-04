@@ -26,12 +26,13 @@ include 'actions/read_order.php';
     <link rel="stylesheet" href="styles/restaurant_owner.css">
     <link rel="stylesheet" href="styles/report.css">
     <!-- javascript -->
+    <script src="scripts/RestaurantOwner.js" charset="utf-8"></script>
     <script src="scripts/MenuList.js" charset="utf-8"></script>
     <!-- icon library | font awesome -->
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
 
-<body onload="init()">
+<body onload="activeNav('4')">
     <header>
         <?php include 'assets/reusable/header.php'; ?>
     </header>

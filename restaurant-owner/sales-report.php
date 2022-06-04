@@ -22,6 +22,9 @@ include 'actions/read_insight_info.php';
     <link rel="stylesheet" href="styles/restaurant_owner.css">
     <link rel="stylesheet" href="styles/report.css">
 
+    <!-- javascript -->
+    <script src="scripts/RestaurantOwner.js" charset="utf-8"></script>
+
     <!-- js chart -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
@@ -185,7 +188,7 @@ include 'actions/read_insight_info.php';
     </script>
 </head>
 
-<body onload="init()">
+<body onload="init(); activeNav('5')">
     <header>
         <?php include 'assets/reusable/header.php'; ?>
     </header>

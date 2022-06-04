@@ -28,12 +28,13 @@ include 'actions/read_menu_list.php';
     <link rel="stylesheet" href="./styles/menu_list.css">
     <link rel="stylesheet" href="./styles/alert_box.css">
     <!-- javascript -->
+    <script src="scripts/RestaurantOwner.js" type="text/javascript"></script>
     <script src="scripts/MenuList.js" type="text/javascript"></script>
     <!-- icon library | font awesome -->
     <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="activeNav('2')">
     <header>
         <?php include 'assets/reusable/header.php'; ?>
     </header>

@@ -23,11 +23,3 @@ textarea {
     grid-column: 1 / 3;
     justify-self: end;
 }
-/*
-    TODO: upload file drop file features
- */
-.preview {
-  width: 100%;
-  max-width: max-content;
-  height: auto;
-}
