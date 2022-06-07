@@ -15,4 +15,4 @@ $sql = "UPDATE `order` SET `order_status` = '$orderStatus' WHERE `order_ID` = $o
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 // print_r($result);
 
-header('location: ../order-status.php');
+header('location: ../index.php');

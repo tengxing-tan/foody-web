@@ -31,6 +31,7 @@ $totalOrder = array();
 $orderDate = array();
 $dayNo = 30;
 while ($dayNo-- > 0 and $row = mysqli_fetch_array($resultTotalOrder)) {
+    // write into array every 7 day
     if ($dayNo % 7 == 0) {
         array_push($orderDate, $row['order_date']);
     } else {
