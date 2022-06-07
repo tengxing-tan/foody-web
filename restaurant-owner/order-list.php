@@ -45,10 +45,14 @@ include 'actions/read_order.php';
         <div id="main-content">
             <div class="one-line-form">
                 <div>
-                    <a href="?id=1"><button class="btn secondary-btn">Days</button></a>
+                    <a href="?id=0"><button class="btn secondary-btn">Days</button></a>
                     <a href="?id=2"><button class="btn secondary-btn">Weeks</button></a>
                     <a href="?id=3"><button class="btn secondary-btn">Months</button></a>
                 </div>
+                <form action="?id=1" method="post">
+                    <input type="date" name="searchDate" class="input-text" />
+                    <button type="submit" class="btn">Search</button>
+                </form>
             </div>
 
             <div class="report-table">
