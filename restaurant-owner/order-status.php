@@ -68,20 +68,19 @@ include 'actions/read_order_status.php';
                         </div>
 
                         <div class="order-details">
-                            <?php
-                            // check if order had fetch before
-                            if (isset($firstItem)) {
-                                if ($firstItem['order_ID'] === $row['order_ID']) {
-                                    echo "<p>" . $firstItem['food_title'] . "  x" . $firstItem['food_quantity'] . "</p>";
-                                }
-                            }
 
+                            <?php
+                            /**
+                             * read ordered food
+                             */
+                            $sql = "SELECT O.order_ID, F.food_title, OFOOD.food_quantity FROM ((`orderedfood` OFOOD INNER JOIN `order` O ON O.order_ID = OFOOD.order_ID) INNER JOIN `food` F ON F.food_ID = OFOOD.food_ID) WHERE O.restaurant_ID = '$restaurantID' AND O.order_ID = ".$row['order_ID'];
+                            // echo $sql;
+
+                            $result_ordered_food = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                             while ($row_ordered_food = mysqli_fetch_assoc($result_ordered_food)) {
-                                // check order id
+
                                 if ($row_ordered_food['order_ID'] == $row['order_ID']) {
                                     echo "<p>" . $row_ordered_food['food_title'] . "  x" . $row_ordered_food['food_quantity'] . "</p>";
-                                } else {
-                                    $firstItem = $row_ordered_food;
                                 }
                             } // close while
                             ?>
@@ -100,7 +99,7 @@ include 'actions/read_order_status.php';
                         <div class="order-action">
                             <?php
                             $actionButton = '';
-                            switch ($row['order_status']) {
+                            switch (strtolower($row['order_status'])) {
                                 case 'ordered':
                                     echo '<a href="actions/update_order_status.php?id=' . $row['order_ID'] . '&status=cancelled"><button type="button" class="order-button cancel-order-button">Cancel</button></a>';
                                     $actionButton = 'preparing';

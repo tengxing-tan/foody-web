@@ -1,25 +1,18 @@
 function filterOrderStatus(selectOrderStatus) {
     const orderStatus = document.getElementsByClassName('order-status');
-    // console.log(orderStatus.length, "items");
+    console.log(orderStatus.length, "items");
 
-    // show all item
-    if (selectOrderStatus === 'all') {
-        for (let i = 0; i < orderStatus.length; i++) {
+    // show category: main,side dish, drink
+    for (let i = 0; i < orderStatus.length; i++) {
+        if (orderStatus[i].innerHTML.toUpperCase() !== selectOrderStatus.toUpperCase()) {
+
+            orderStatus[i].parentElement.parentElement.parentElement.style.display = "none";
+        } else {
             orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
         }
-    } else {
-
-        // show category: main,side dish, drink
-        for (let i = 0; i < orderStatus.length; i++) {
-            if (orderStatus[i].innerHTML.toUpperCase() !== selectOrderStatus.toUpperCase()) {
-
-                orderStatus[i].parentElement.parentElement.parentElement.style.display = "none";
-            } else {
-                orderStatus[i].parentElement.parentElement.parentElement.style.display = "grid";
-            }
-            // console.log(orderStatus[i].innerHTML, showFc, orderStatus[i].innerHTML !== showFc);
-        }
+        // console.log(orderStatus[i].innerHTML, showFc, orderStatus[i].innerHTML !== showFc);
     }
+
     /**
      * change button color
      */
@@ -35,7 +28,7 @@ function filterOrderStatus(selectOrderStatus) {
             filter[i].style.backgroundColor = 'white';
             filter[i].style.color = 'var(--primary-bg)';
         }
-        // console.log(typeof filter[i], selectOrderStatus);
+        // console.log(filter[i].value, selectOrderStatus);
         // console.log(filter[i].className)
     }
 }
