@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <!-- title bar -->
 <div id="title-bar">
     <!-- foody logo -->

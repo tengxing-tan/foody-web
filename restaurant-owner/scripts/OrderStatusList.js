@@ -11,7 +11,7 @@ function filterOrderStatus(selectOrderStatus) {
 
         // show category: main,side dish, drink
         for (let i = 0; i < orderStatus.length; i++) {
-            if (orderStatus[i].innerHTML !== selectOrderStatus) {
+            if (orderStatus[i].innerHTML.toUpperCase() !== selectOrderStatus.toUpperCase()) {
 
                 orderStatus[i].parentElement.parentElement.parentElement.style.display = "none";
             } else {

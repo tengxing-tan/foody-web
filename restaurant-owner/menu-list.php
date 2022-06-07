@@ -108,7 +108,7 @@ include 'actions/read_menu_list.php';
                                     <input type="checkbox" id="toggle" class="offscreen" <?php echo ($row['food_availability'] == 1) ? "checked" : "" ?> />
                                     <label for="toggle" class="switch"></label>
                                 </a>
-                                Available
+                                Availability
                             </p>
                             <p class="food-desc"><?php echo $row['food_description']; ?></p>
                         </div>
