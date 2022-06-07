@@ -61,8 +61,8 @@ echo $msg;
 /**
  * mysql Qeury
  */
-$sql = "INSERT INTO `food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`) " .
-  "VALUES ('$restaurantID','$foodTitle','$foodCategory','$foodDescription','$foodImage','$foodPrice')";
+$sql = "INSERT INTO `food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`, `food_availability`) " .
+  "VALUES ('$restaurantID','$foodTitle','$foodCategory','$foodDescription','$foodImage','$foodPrice', 1)";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 

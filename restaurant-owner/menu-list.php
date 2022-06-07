@@ -50,7 +50,7 @@ include 'actions/read_menu_list.php';
             ?>
                 <div class="alert">
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    Please add menu item to ensure at least 10 food items. [<?php mysqli_num_rows($result); ?>/10]
+                    Please add menu item to ensure at least 10 food items. [<?php echo mysqli_num_rows($result); ?>/10]
                 </div>
             <?php
             } // close if
@@ -92,20 +92,28 @@ include 'actions/read_menu_list.php';
                     $foodImagePath = "assets/menu/$restaurantID/" . $row['food_image'];
                     //print each row
                 ?>
-                    <a class="menu-item" href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
+                    <div class="menu-item">
                         <!--
-                                Store food category id for filter purpose
-                             -->
+                            Store food category id for filter purpose
+                        -->
                         <span class="food-category-id" style="display: none;"><?php echo $row['food_category_ID']; ?></span>
                         <div>
-                            <img class="food-picture preview" src="<?php echo (file_exists($foodImagePath)) ? $foodImagePath : 'assets/image/food_picture.png'; ?>" alt="<?php echo $row['food_title']; ?>">
-                            <!-- <img class="food-picture preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_picture']; ?>" alt="<?php echo $row['food_title']; ?>"> -->
+                            <a href="view-menu-item.php?id=<?php echo $row['food_ID']; ?>">
+                                <img class="food-picture preview" src="<?php echo (file_exists($foodImagePath)) ? $foodImagePath : 'assets/image/food_picture.png'; ?>" alt="<?php echo $row['food_title']; ?>">
+                            </a>
                             <p class="food-title"><?php echo $row['food_title']; ?></p>
                             <p class="food-category"><?php echo $row['category_name'] ?></p>
+                            <p style="color: darkslategrey; font-size: 0.75rem; padding: 0.2rem">
+                                <a href="actions/update_food_availability.php?id=<?php echo $row['food_ID'].'&a='.$row['food_availability']; ?>">
+                                    <input type="checkbox" id="toggle" class="offscreen" <?php echo ($row['food_availability'] == 1) ? "checked" : "" ?> />
+                                    <label for="toggle" class="switch"></label>
+                                </a>
+                                Available
+                            </p>
                             <p class="food-desc"><?php echo $row['food_description']; ?></p>
                         </div>
                         <p class="food-price" onload="formatPrice()"><?php echo $row['food_price']; ?></p>
-                    </a>
+                    </div>
                 <?php
                 } // close while
                 ?>
