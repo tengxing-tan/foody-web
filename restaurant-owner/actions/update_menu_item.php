@@ -1,10 +1,6 @@
 <?php
 
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
+include 'db_connect.php';
 /**
  * Session
  */
@@ -24,7 +20,7 @@ $foodImage = $_FILES['foodImage']['name'];
 $updateFoodImage = (is_uploaded_file($foodImage)) ? "`food_image`='$foodImage'," : "";
     
 
-$sql = "UPDATE `Food` SET `food_title`='$foodTitle'," .
+$sql = "UPDATE `food` SET `food_title`='$foodTitle'," .
     "`food_category_ID`='$foodCategory'," .
     "`food_description`='$foodDescription'," .
     $updateFoodImage .

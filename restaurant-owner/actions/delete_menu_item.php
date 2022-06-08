@@ -1,14 +1,10 @@
 <?php
 
+include 'db_connect.php';
 /**
- * Establish database
- * db name: 'foody'
+ * SESSION
  */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
-/**
- * Session
- */
-// session_start();
+session_start();
 
 // $restaurantID = $_SESSION['restaurantID'];
 $restaurantID = 1;
@@ -24,10 +20,11 @@ $foodImage = $_FILES['foodImage']['name'];
 $updateFoodImage = (is_uploaded_file($foodImage)) ? "`food_image`='$foodImage'," : "";
     
 
-$sql = "DELETE FROM `Food` WHERE food_ID = $foodID";
+$sql = "DELETE FROM `food` WHERE food_ID = $foodID";
 // echo $sql;
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
 if ($result) {
     // echo 'delete ok';
     $_SESSION['status'] = 3;

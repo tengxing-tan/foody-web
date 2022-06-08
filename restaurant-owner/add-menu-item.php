@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 /**
@@ -5,16 +6,11 @@
  */
 session_start();
 
-/**
- * Establish database
- * db name: 'foody'
- */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
-// $restaurant_ID = $_SESSION['restaurant_ID'];
-$restaurant_ID = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
+include 'actions/read_menu_item.php';
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +23,8 @@ $restaurant_ID = 1;
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="styles/restaurant_owner.css">
   <link rel="stylesheet" href="styles/manage_menu_item.css">
+  <!-- javascript -->
+  <script src="./scripts/Preview.js" type="text/javascript"></script>
   <!-- icon library | font awesome -->
   <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
@@ -42,7 +40,7 @@ $restaurant_ID = 1;
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <form class="user-input-form" action="actions/create_menu_item.php?id=<?php echo $restaurant_ID; ?>" method="post" enctype="multipart/form-data">
+      <form class="user-input-form" action="actions/create_menu_item.php" method="post" enctype="multipart/form-data">
         <!-- Food title -->
         <label class="bold-label required-input" for="foodTitle">Food title</label>
         <input class="text-input" type="text" name="foodTitle" placeholder="Enter food title" required>
@@ -50,14 +48,11 @@ $restaurant_ID = 1;
         <label class="bold-label required-input" for="foodCategory">Food category</label>
         <select class="text-input" name="foodCategory" required>
           <?php
-          $sql = "SELECT * FROM `FoodCategory`";
-          $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-          while ($row = mysqli_fetch_assoc($result)) {
-            //print each row
+          while ($row_fc = mysqli_fetch_assoc($result_fc)) {
+            $foodCategoryID = $row_fc['food_category_ID'];
           ?>
-            <option value="<?php echo $row['food_category_ID']; ?>">
-              <?php echo $row['category_name']; ?>
+            <option value="<?php echo $foodCategoryID; ?>">
+              <?php echo $row_fc['category_name']; ?>
             </option>
           <?php
           } // close while mysqli fetch
@@ -73,9 +68,9 @@ $restaurant_ID = 1;
         <label class="bold-label required-input" for="foodImage">Food picture</label>
         <!-- upload food picture -->
         <!-- remember to add inside form: enctype="multipart/form-data" -->
-        <div>
-          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
-          <img id="preview" src="" alt="Preview">
+        <div style="display: inline-flex; flex-direction: column; align-items: start; width: 14rem;">
+          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()" style="margin-bottom: 1rem;">
+          <img id="preview" class="food-picture preview" src="" alt="Preview">
         </div>
         <!-- Add button -->
         <button class="btn submit-button" type="submit" name="submit" value="add-menu">Add</button>
@@ -83,17 +78,5 @@ $restaurant_ID = 1;
     </div>
   </div>
 </body>
-<script type="text/javascript">
-  /**
-   * Preview food image
-   */
-  function updateImageDisplay() {
-    const file = document.getElementById('input-food-image').files;
-    const preview = document.getElementById('preview');
-    for (const obj of file) {
-      preview.src = URL.createObjectURL(obj);
-    }
-  }
-</script>
 
 </html>

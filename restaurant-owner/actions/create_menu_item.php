@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
+include 'db_connect.php';
 /**
- * Establish database
- * db name: 'foody'
+ * SESSION
  */
-$conn = mysqli_connect("localhost", "root", NULL, "foody", "3306") or die(mysqli_connect_error());
-
-$restaurantID = $_GET['id'];
+session_start();
+// $restaurantID = 3;
+$restaurantID = $_SESSION['restaurantID'];
 $foodTitle = $_POST['foodTitle'];
 $foodCategory = $_POST['foodCategory'];
 $foodDescription = $_POST['foodDescription'];
@@ -22,6 +22,19 @@ $target_file = "../assets/menu/$restaurantID/" . $foodImage;
 
 $foodImage = $_FILES["foodImage"]["name"];
 $tempname = $_FILES["foodImage"]["tmp_name"];
+
+/**
+ * Create folder for new restaurant
+ */
+if (is_dir("../assets/menu/$restaurantID")) {
+  echo 'restaurant folder exist';
+} else {
+  if (mkdir("../assets/menu/".$restaurantID, 0777, true)) {
+    echo 'make directory successfully';
+  } else {
+    echo "failed. I want to create directory at ../assets/menu/".$restaurantID;
+  }
+}
 $folder = "../assets/menu/$restaurantID/" . $foodImage;
 
 
@@ -48,24 +61,24 @@ echo $msg;
 /**
  * mysql Qeury
  */
-$sql = "INSERT INTO `Food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`) " .
-  "VALUES ('$restaurantID','$foodTitle','$foodCategory','$foodDescription','$foodImage','$foodPrice')";
+$sql = "INSERT INTO `food`(`restaurant_ID`, `food_title`, `food_category_ID`, `food_description`, `food_image`, `food_price`, `food_availability`) " .
+  "VALUES ('$restaurantID','$foodTitle','$foodCategory','$foodDescription','$foodImage','$foodPrice', 1)";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-/**
- * Jump another page
- */
 if ($result) {
   // echo 'add item ok';
   $_SESSION['status'] = 1;
 } else {
-  // echo $sql;
+  // echo 'filename exists';
   $_SESSION['status'] = 0;
 }
 
-// header('location: ../menu-list.php');
-// exit();
+/**
+ * Jump another page
+ */
+header('location: ../menu-list.php');
+exit();
 
 /**
  * Session => status

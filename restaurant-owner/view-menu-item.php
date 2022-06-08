@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <?php
 /**
- * Session
+ * SESSION
  */
-// session_start();
-
-// $restaurantID = $_SESSION['restaurantID'];
-$restaurantID = 1;
+session_start();
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
 
 /**
  * read menu item from database
@@ -27,6 +26,8 @@ $food_ID = $_GET['id'];
   <link rel="stylesheet" href="styles/restaurant_owner.css">
   <link rel="stylesheet" href="styles/menu_list.css">
   <link rel="stylesheet" href="styles/manage_menu_item.css">
+  <!-- javascript -->
+  <script src="./scripts/Preview.js" type="text/javascript"></script>
   <!-- icon library | font awesome -->
   <script src="https://kit.fontawesome.com/06b2bd9377.js" crossorigin="anonymous"></script>
 </head>
@@ -42,7 +43,7 @@ $food_ID = $_GET['id'];
 
     <!-- main content (right side) -->
     <div id="main-content">
-      <!-- 
+      <!--
         Form
        -->
       <form class="user-input-form" action="actions/update_menu_item.php?id=<?php echo $food_ID; ?>" method="post" enctype="multipart/form-data">
@@ -52,7 +53,7 @@ $food_ID = $_GET['id'];
         <input class="text-input" type="text" name="foodTitle" placeholder="Enter food title" value="<?php echo $row['food_title']; ?>" required>
         <!-- Food category -->
         <label class="bold-label" for="foodCategory">Food category</label>
-        <!-- 
+        <!--
           Show drop down by query table: food category
          -->
         <select class="text-input required-input" name="foodCategory" required>
@@ -63,7 +64,7 @@ $food_ID = $_GET['id'];
           ?>
               <option value="<?php echo $foodCategoryID; ?>" <?php if ($foodCategoryID === $row['food_category_ID']) {
                                                                 echo "selected";
-                                                              } // use attribute: selected 
+                                                              } // use attribute: selected
                                                               ?>>
                 <?php echo $row_fc['category_name']; ?>
               </option>
@@ -82,13 +83,13 @@ $food_ID = $_GET['id'];
         <label class="bold-label" for="foodImage">Food picture</label>
         <!-- upload food picture -->
         <!-- remember to add inside form: enctype="multipart/form-data" -->
-        <div>
-          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()">
-          <img id="preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_image']; ?>" alt="Preview">
+        <div style="display: inline-flex; flex-direction: column; align-items: start; width: 14rem;">
+          <input type="file" id="input-food-image" name="foodImage" accept="image/*" onchange="updateImageDisplay()" style="margin-bottom: 1rem;">
+          <img id="preview" class="food-picture preview" src="<?php echo "assets/menu/$restaurantID/" . $row['food_image']; ?>" alt="Preview">
         </div>
         <!-- button -->
         <div class="submit-button">
-          <button class="btn secondary-btn" type="reset">Reset</button>
+        <button class="btn secondary-btn" type="reset"><i class="fa fa-undo" style="font-size: inherit; margin: 0 4px 0;"></i>Reset</button>
           <a href="actions/delete_menu_item.php?id=<?php echo $food_ID; ?>"><button class="btn danger-button" type="button">Delete</button></a>
           <button class="btn submit-button" type="submit">Update</button>
         </div>
@@ -96,18 +97,5 @@ $food_ID = $_GET['id'];
     </div>
   </div>
 </body>
-
-<script type="text/javascript">
-  /**
-   * Preview food image
-   */
-  function updateImageDisplay() {
-    const file = document.getElementById('input-food-image').files;
-    const preview = document.getElementById('preview');
-    for (const obj of file) {
-      preview.src = URL.createObjectURL(obj);
-    }
-  }
-</script>
 
 </html>
