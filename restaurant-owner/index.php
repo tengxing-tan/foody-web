@@ -4,6 +4,11 @@
  * SESSION
  */
 session_start();
+// get restaurant owner id from session
+// $roID = $_SESSION['ro_ID'];
+$_SESSION['ro_ID'] = 1;
+
+// store restaurant id into session
 $_SESSION['restaurantID'] = 1;
 // $restaurantID = 1;
 

@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <?php
-
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
-
 // show alert message if user manage a menu item
 include 'actions/alert_menu_status.php';
 

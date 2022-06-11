@@ -1,5 +1,4 @@
 <?php
-
 include 'db_connect.php';
 
 $orderID = $_GET['id'];

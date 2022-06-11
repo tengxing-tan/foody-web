@@ -1,6 +1,10 @@
 <?php
-
 include 'db_connect.php';
+/**
+ * Session
+ */
+session_start();
+$roID = $_SESSION['ro_ID'];
 
 // if update restaurant details
 if (isset($_GET['id'])) {
@@ -12,9 +16,9 @@ if (isset($_GET['id'])) {
     $sql = "SELECT R.*, RT.restaurantType_name FROM `restaurant` R INNER JOIN `restauranttype` RT WHERE R.restaurant_ID = '$restaurantID' AND R.restaurantType_ID = RT.restaurantType_ID";
 } else {
     /**
-     * get all registered restaurant
+     * get all registered restaurant under this restaurant owner
      */
-    $sql = "SELECT R.*, RT.restaurantType_name FROM `restaurant` R INNER JOIN `restauranttype` RT WHERE R.restaurantType_ID = RT.restaurantType_ID";
+    $sql = "SELECT R.*, RT.restaurantType_name FROM `restaurant` R INNER JOIN `restauranttype` RT WHERE R.ro_ID = '$roID' AND R.restaurantType_ID = RT.restaurantType_ID";
 }
 // echo $sql;
 

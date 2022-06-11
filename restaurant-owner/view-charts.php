@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-
+// read data for charts
 include 'actions/read_insight_info.php';
 ?>
 <html lang="en">

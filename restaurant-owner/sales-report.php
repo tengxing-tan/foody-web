@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <?php
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $_SESSION['restaurantID'] = 1;
-
+// read data for charts
 include 'actions/read_insight_info.php';
 ?>
 <html lang="en">

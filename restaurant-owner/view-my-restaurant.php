@@ -1,12 +1,5 @@
 <?php
-
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
-
+// read all restaurants registed under this restaurant owner
 include 'actions/read_restaurant.php'; 
 ?>
 <!DOCTYPE html>

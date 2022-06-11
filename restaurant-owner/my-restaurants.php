@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 <?php
-// Establish MySQL connection
-include 'db_connect.php';
-
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
-
-// show alert message if user manage a menu item
-include 'actions/alert_menu_status.php';
-
 // read menu item from database
 include 'actions/read_restaurant.php';
 ?>

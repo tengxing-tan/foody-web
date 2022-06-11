@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <?php
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
-
-/**
- * read order from database
- */
+// read restaurant owner's profile
 include 'actions/read_ro_profile.php';
 ?>
 

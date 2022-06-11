@@ -5,9 +5,8 @@ include 'db_connect.php';
  * Session
  */
 session_start();
-
-// $restaurantID = $_SESSION['restaurantID'];
-$restaurantID = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
 
 // get values
 $foodID = $_GET['id'];

@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <?php
-/**
- * SESSION
- */
-session_start();
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
-
-/**
- * read order from database
- */
+// read order from database
 include 'actions/read_order.php';
 ?>
 
@@ -49,8 +40,8 @@ include 'actions/read_order.php';
                     <a href="?id=2"><button class="btn secondary-btn">Weeks</button></a>
                     <a href="?id=3"><button class="btn secondary-btn">Months</button></a>
                 </div>
-                <form action="?id=1" method="post">
-                    <input type="date" name="searchDate" class="input-text" />
+                <form action="?id=1" method="post" style="display: flex; min-width: 30rem;">
+                    <input type="date" name="searchDate" class="text-input" id="search-bar" />
                     <button type="submit" class="btn">Search</button>
                 </form>
             </div>

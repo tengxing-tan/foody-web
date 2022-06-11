@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <?php
-
-/**
- * Session
- */
-session_start();
-
-$restaurantID = $_SESSION['restaurantID'];
-// $restaurantID = 1;
+// read food
 include 'actions/read_menu_item.php';
 ?>
 

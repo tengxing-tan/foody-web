@@ -7,7 +7,8 @@
          <li><a id="nav-5" class="nav-link" href="sales-report.php">Sales Report</a></li>
          <li><a id="nav-6" class="nav-link" href="my-restaurants.php">My Restaurant</a></li>
      </ul>
-     <a href="index.php" class="nav-link" style="text-decoration: underline;">
+     <!-- logout, link to outside of the folder restaurant-owner -->
+     <a href="../../../" class="nav-link" style="text-decoration: underline;">
         Logout
          <i class="fa fa-sign-out" aria-hidden="true" style></i>
      </a>

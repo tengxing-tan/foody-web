@@ -1,13 +1,11 @@
 <?php
-
 include 'db_connect.php';
 /**
  * SESSION
  */
 session_start();
-
-// $restaurantID = $_SESSION['restaurantID'];
-$restaurantID = 1;
+$restaurantID = $_SESSION['restaurantID'];
+// $restaurantID = 1;
 
 // get food id
 $foodID = $_GET['id'];

@@ -1,9 +1,11 @@
 <?php
-
 include 'db_connect.php';
-
-// $roID = $_GET['roID'];
-$roID = 1;
+/**
+ * Session
+ */
+session_start();
+$roID = $_SESSION['ro_ID'];
+// $roID = 1;
 
 /**
  * read order
