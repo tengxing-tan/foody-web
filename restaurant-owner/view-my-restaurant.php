@@ -38,7 +38,7 @@ include 'actions/read_restaurant.php';
         <label class="bold-label required-input" for="restaurantName">Restaurant name</label>
         <input class="text-input" type="text" name="restaurantName" placeholder="Enter restaurant name" value="<?php echo $row['restaurant_name']; ?>" required>
         <!-- Restaurant type -->
-        <label class="bold-label" for="restaurantType">Restaurant type</label>
+        <label class="bold-label required-input" for="restaurantType">Restaurant type</label>
         <!--
           Show drop down by query table: restaurant type
          -->

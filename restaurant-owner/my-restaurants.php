@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <?php
+// show alert message if user manage a menu item
+include 'actions/alert_crud_status.php';
 // read menu item from database
 include 'actions/read_restaurant.php';
 ?>
