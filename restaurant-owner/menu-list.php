@@ -80,7 +80,11 @@ include 'actions/read_menu_list.php';
              -->
             <div class="menu-list" style="margin-bottom: 5rem;">
                 <?php
+                $restaurantID = $_SESSION['restaurantID'];
                 while ($row = mysqli_fetch_assoc($result)) {
+                    /**
+                     * Set food image path
+                     */
                     $foodImagePath = "assets/menu/$restaurantID/" . $row['food_image'];
                     //print each row
                 ?>
@@ -96,7 +100,7 @@ include 'actions/read_menu_list.php';
                             <p class="food-title"><?php echo $row['food_title']; ?></p>
                             <p class="food-category"><?php echo $row['category_name'] ?></p>
                             <p style="color: darkslategrey; font-size: 0.75rem; padding: 0.2rem">
-                                <a href="actions/update_food_availability.php?id=<?php echo $row['food_ID'].'&a='.$row['food_availability']; ?>">
+                                <a href="actions/update_food_availability.php?id=<?php echo $row['food_ID'] . '&a=' . $row['food_availability']; ?>">
                                     <input type="checkbox" <?php echo ($row['food_availability'] == 1) ? "checked" : "" ?> />
                                 </a>
                                 Availability

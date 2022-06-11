@@ -5,11 +5,14 @@
  */
 session_start();
 // get restaurant owner id from session
-// $roID = $_SESSION['ro_ID'];
-$_SESSION['ro_ID'] = 1;
+// $roID = $_SESSION['roID'];
+$_SESSION['roID'] = 1;
+// echo $_SESSION['roID'];
 
+// get restaurant id
+include 'actions/read_restaurant.php';
 // store restaurant id into session
-$_SESSION['restaurantID'] = 1;
+$_SESSION['restaurantID'] = mysqli_fetch_assoc($result)['restaurant_ID'];
 // $restaurantID = 1;
 
 /**

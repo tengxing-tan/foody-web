@@ -4,21 +4,18 @@ include 'db_connect.php';
  * Session
  */
 session_start();
-$roID = $_SESSION['ro_ID'];
+$roID = $_SESSION['roID'];
 
-// if update restaurant details
-if (isset($_GET['id'])) {
-    $restaurantID = $_GET['id'];
-
+// if want to read restaurant details
+if (isset($_SESSION['restaurantID'])) {
+    $restaurantID = $_SESSION['restaurantID'];
     /**
-     * read restaurant owner details
+     * read restaurant details
      */
     $sql = "SELECT R.*, RT.restaurantType_name FROM `restaurant` R INNER JOIN `restauranttype` RT WHERE R.restaurant_ID = '$restaurantID' AND R.restaurantType_ID = RT.restaurantType_ID";
 } else {
-    /**
-     * get all registered restaurant under this restaurant owner
-     */
-    $sql = "SELECT R.*, RT.restaurantType_name FROM `restaurant` R INNER JOIN `restauranttype` RT WHERE R.ro_ID = '$roID' AND R.restaurantType_ID = RT.restaurantType_ID";
+    // if only want restaurant id for this owner
+    $sql = "SELECT `restaurant_ID` FROM `restaurant` WHERE `ro_ID` = $roID";
 }
 // echo $sql;
 

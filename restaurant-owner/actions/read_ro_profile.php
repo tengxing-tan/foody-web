@@ -4,7 +4,7 @@ include 'db_connect.php';
  * Session
  */
 session_start();
-$roID = $_SESSION['ro_ID'];
+$roID = $_SESSION['roID'];
 // $roID = 1;
 
 /**
