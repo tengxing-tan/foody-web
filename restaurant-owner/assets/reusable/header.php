@@ -6,7 +6,12 @@
     <!-- user profile -->
     <div>
         <a class="icon-link" href="restaurant-owner-profile.php">
-            Restaurant Owner
+            <?php
+            session_start();
+            $roID = $_SESSION['ro_ID'];
+            $roNameHeader = mysqli_query($conn, "SELECT `ro_name` FROM `restaurantowner` WHERE `ro_ID` = $roID");
+            echo mysqli_fetch_row($roNameHeader)[0];
+            ?>
             <i class="fa-solid fa-user"></i>
         </a>
     </div>
